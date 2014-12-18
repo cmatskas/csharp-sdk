@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "relayr-csharp-sdk", "relayr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDKUser", "SDKUser\SDKUser.csproj", "{D91A11AC-2646-4EE2-9547-CF6656A6BE4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "relayr-csharp-tests", "relayr-csharp-tests\relayr-csharp-tests.csproj", "{AF016827-6200-423D-B269-46169F11626D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D91A11AC-2646-4EE2-9547-CF6656A6BE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D91A11AC-2646-4EE2-9547-CF6656A6BE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D91A11AC-2646-4EE2-9547-CF6656A6BE4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF016827-6200-423D-B269-46169F11626D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF016827-6200-423D-B269-46169F11626D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF016827-6200-423D-B269-46169F11626D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF016827-6200-423D-B269-46169F11626D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
