@@ -36,7 +36,7 @@ namespace relayr_csharp_sdk
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task GetRequest()
+        public async Task GetUserInfo()
         {
             urlParameters = "oauth2/user-info";
             client.DefaultRequestHeaders.Add("Authorization", "Bearer "+_token);
@@ -47,12 +47,10 @@ namespace relayr_csharp_sdk
                 //User user = await response.Content.ReadAsAsync<User>();
                 //Debug.WriteLine("{0}\t${1}\t{2}", user.Name, user.id, user.email);
                 Debug.WriteLine(response);
+                Debug.WriteLine(response.Content.ReadAsStringAsync().Result);
                 // Parse the response body. Blocking!
-                var dataObjects = response.Content.ReadAsAsync<IEnumerable<User>>().Result;
-                foreach (var d in dataObjects)
-                {
-                    Debug.WriteLine("{0}", d.Name);
-                }
+                //var user = response.Content.ReadAsAsync<User>().Result;
+                //Debug.WriteLine(user.Name);
             }
             else
             {

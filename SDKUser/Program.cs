@@ -12,7 +12,7 @@ namespace SDKUser
         static void Main(string[] args)
         {
             RelayrHttpManager manager = new RelayrHttpManager("TujmWC4HPGjMLQDfsQ9z_OxmHZ0h4-Fk");
-            manager.GetRequest();
+            manager.GetUserInfo();
             Console.WriteLine("LOL");
             if (System.Diagnostics.Debugger.IsAttached) Console.ReadLine();
             //Console.
