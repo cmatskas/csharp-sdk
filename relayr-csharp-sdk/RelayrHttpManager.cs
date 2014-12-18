@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Collections;
+using System.Windows;
+using System.Collections.Generic;
 
 namespace relayr_csharp_sdk
 {
@@ -13,7 +16,7 @@ namespace relayr_csharp_sdk
         public string email { get; set; }
     }
 
-    class RelayrHttpManager
+     public class RelayrHttpManager
     {
         private static string _token;
         private const string relayrAPI = "https://api.relayr.io";
@@ -22,7 +25,7 @@ namespace relayr_csharp_sdk
         private static HttpClient client;
         private static HttpResponseMessage response;
 
-        RelayrHttpManager(string token)
+       public RelayrHttpManager(string token)
         {
             _token = token;
             client = new HttpClient();
@@ -33,7 +36,7 @@ namespace relayr_csharp_sdk
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public static async Task GetRequest()
+        public async Task GetRequest()
         {
             urlParameters = "oauth2/user-info";
             client.DefaultRequestHeaders.Add("Authorization", "Bearer "+_token);
@@ -41,16 +44,15 @@ namespace relayr_csharp_sdk
              response = client.GetAsync(urlParameters).Result;  // Blocking call!
             if (response.IsSuccessStatusCode)
             {
-                User user = await response.Content.ReadAsAsync<User>();
-                Debug.WriteLine("{0}\t${1}\t{2}", user.Name, user.id, user.email);
-
+                //User user = await response.Content.ReadAsAsync<User>();
+                //Debug.WriteLine("{0}\t${1}\t{2}", user.Name, user.id, user.email);
+                Debug.WriteLine(response);
                 // Parse the response body. Blocking!
-/*                var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;
+                var dataObjects = response.Content.ReadAsAsync<IEnumerable<User>>().Result;
                 foreach (var d in dataObjects)
                 {
                     Debug.WriteLine("{0}", d.Name);
                 }
- */
             }
             else
             {

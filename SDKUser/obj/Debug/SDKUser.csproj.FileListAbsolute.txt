@@ -1,0 +1,13 @@
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\obj\Debug\SDKUser.csprojResolveAssemblyReference.cache
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\SDKUser.exe.config
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\SDKUser.exe
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\SDKUser.pdb
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\relayr-csharp-sdk.dll
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\relayr-csharp-sdk.pdb
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\relayr-csharp-sdk.pri
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\obj\Debug\SDKUser.exe
+C:\Users\user\Documents\GitHub\csharp-sdk\SDKUser\obj\Debug\SDKUser.pdb
