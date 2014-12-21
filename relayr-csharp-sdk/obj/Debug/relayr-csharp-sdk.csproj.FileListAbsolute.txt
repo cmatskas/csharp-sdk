@@ -25,3 +25,30 @@ C:\Users\user\Documents\GitHub\csharp-sdk\relayr-csharp-sdk\bin\Debug\Newtonsoft
 C:\Users\user\Documents\GitHub\csharp-sdk\relayr-csharp-sdk\bin\Debug\System.Net.Http.Extensions.xml
 C:\Users\user\Documents\GitHub\csharp-sdk\relayr-csharp-sdk\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\user\Documents\GitHub\csharp-sdk\relayr-csharp-sdk\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll.config
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.pdb
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.pri
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.csproj.App.config
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.csprojResolveAssemblyReference.cache
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.dll
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.pdb
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\priconfig.xml
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\priconfig.xml.intermediate
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\layout.resfiles
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\layout.resfiles.intermediate
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\resources.resfiles
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\resources.resfiles.intermediate
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\pri.resfiles
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\pri.resfiles.intermediate
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\qualifiers.txt
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\qualifiers.txt.intermediate
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\MultipleQualifiersPerDimensionFound.txt

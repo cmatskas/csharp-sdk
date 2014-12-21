@@ -1,0 +1,13 @@
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\client-test-app.csprojResolveAssemblyReference.cache
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\App.g.i.cs
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\App.g.cs
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\MainPage.g.i.cs
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\MainPage.g.cs
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\App.xaml
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\MainPage.xaml
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\App.xbf
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\MainPage.xbf
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\ClientTestApp.exe
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\Debug\ClientTestApp.pdb
