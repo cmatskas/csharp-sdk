@@ -29,7 +29,7 @@ namespace relayr_csharp_sdk
             httpRequest = new HttpRequestMessage();
         }
 
-        public enum httpOperation
+        public enum ApiCall
         {
             [Uri("users/validate?email=!")]
             [OperationType("GET")]
@@ -40,15 +40,168 @@ namespace relayr_csharp_sdk
             [Uri("users/!")]
             [OperationType("PATCH")]
             UserUpdateDetails,
+            [Uri("publishers")]
+            [OperationType("GET")]
+            PublishersReturnList,
+            [Uri("publishers")]
+            [OperationType("POST")]
+            PublishersRegister,
+            [Uri("publishers/!")]
+            [OperationType("PATCH")]
+            PublisherUpdateAttributes,
+            [Uri("publishers/!")]
+            [OperationType("DELETE")]
+            PublisherDelete,
+            [Uri("users/!/publishers")]
+            [OperationType("GET")]
+            PublishersListByUser,
+            [Uri("apps")]
+            [OperationType("GET")]
+            ApplicationsListAll,
+            [Uri("apps")]
+            [OperationType("POST")]
+            ApplicationsAddNew,
+            [Uri("oauth2/app-info")]
+            [OperationType("GET")]
+            ApplicationsGetInfo,
+            [Uri("oauth2/appdev-token/!")]
+            [OperationType("GET")]
+            ApplicationsReturnToken,
+            [Uri("oauth2/appdev-token/!")]
+            [OperationType("POST")]
+            ApplicationsReplaceToken,
+            [Uri("oauth2/appdev-token/!")]
+            [OperationType("DELETE")]
+            ApplicationDeleteToken,
+            [Uri("apps/!")]
+            [OperationType("GET")]
+            ApplicationsRetrievePublisherApp,
+            [Uri("apps/!")]
+            [OperationType("PATCH")]
+            ApplicationsUpdateAttributes,
+            [Uri("apps/!")]
+            [OperationType("DELETE")]
+            ApplicationsDeleteApp,
+            [Uri("users/!/apps/!")]
+            [OperationType("POST")]
+            ApplicationInstallAppUnderUser,
+            [Uri("users/!/apps/!")]
+            [OperationType("DELETE")]
+            ApplicationUninstallAppUnderUser,
+            [Uri("users/!/apps/!")]
+            [OperationType("GET")]
+            ApplicationInstalledAppInfo,
+            [Uri("users/!/apps")]
+            [OperationType("GET")]
+            ApplicationListUserApps,
+            [Uri("devices/!/apps")]
+            [OperationType("GET")]
+            ApplicationsListConnectedToDevice,
+            [Uri("publishers/!/apps")]
+            [OperationType("GET")]
+            ApplicationsListByPublisher,
+            [Uri("publishers/!/apps/extended")]
+            [OperationType("GET")]
+            ApplicationsListByPublisherExtended,
+            [Uri("apps/!/devices/!")]
+            [OperationType("POST")]
+            ApplicationsConnectAppToDevice,
+            [Uri("apps/!/devices/!")]
+            [OperationType("DELETE")]
+            ApplicationsDisconnectAppFromDevice,
+            [Uri("devices")]
+            [OperationType("POST")]
+            DevicesRegisterNew,
             [Uri("users/!/devices?")]
             [OperationType("GET")]
-            DevicesUnderASpecificUser,
+            DevicesListUnderSpecificUser,
             [Uri("users/!/devices?meaning=!")]
             [OperationType("GET")]
-            DevicesUnderASpecificUserWithMeaning,
+            DevicesListUnderSpecificUserWithMeaning,
+            [Uri("devices/!")]
+            [OperationType("GET")]
+            DeviceInformation,
             [Uri("devices/!")]
             [OperationType("PATCH")]
-            DevicesUpdateAttributes
+            DevicesUpdateAttributes,
+            [Uri("devices/!")]
+            [OperationType("DELETE")]
+            DevicesDelete,
+            [Uri("devices/!/apps/!")]
+            [OperationType("POST")]
+            DevicesConnectDeviceToApp,
+            [Uri("devices/!/apps/!")]
+            [OperationType("DELETE")]
+            DevicesDisconnectDeviceFromApp,
+            [Uri("users/!/devices/public?")]
+            [OperationType("GET")]
+            DevicesListPublic,
+            [Uri("users/!/devices/public?meaning=!")]
+            [OperationType("GET")]
+            DevicesListPublicWithMeaning,
+            [Uri("devices/!/subscription")]
+            [OperationType("POST")]
+            DevicesSubscribeUserToPublic,
+            [Uri("users/!/devices/!/bookmarks")]
+            [OperationType("POST")]
+            DevicesBookmarkPublic,
+            [Uri("users/!/devices/!/bookmarks")]
+            [OperationType("DELETE")]
+            DevicesDeleteBookmarkPublic,
+            [Uri("users/!/devices/bookmarks")]
+            [OperationType("GET")]
+            DevicesListBookmarkedByUser,
+            [Uri("device-models")]
+            [OperationType("GET")]
+            DevicesListOfModels,
+            [Uri("device-models/!")]
+            [OperationType("GET")]
+            DevicesGetInfoAboutModel,
+            [Uri("device-models/!/firmware")]
+            [OperationType("GET")]
+            DevicesGetFirmwareListForModel,
+            [Uri("device-models/!/firmware/!")]
+            [OperationType("GET")]
+            DevicesGetFirmwareVersionRecord,
+            [Uri("device-models/meanings")]
+            [OperationType("GET")]
+            DevicesListPossibleReadingTypes,
+            [Uri("wunderbars/!")]
+            [OperationType("DELETE")]
+            WunderBarDelete,
+            [Uri("devices/!/firmware")]
+            [OperationType("GET")]
+            DeviceConfigurationInformation,
+            [Uri("devices/!/configuration")]
+            [OperationType("POST")]
+            DeviceModifyConfiguration,
+            [Uri("POST")]
+            [OperationType("devices/!/cmd/!")]
+            DeviceIssueCommand,
+            [Uri("transmitters")]
+            [OperationType("Post")]
+            TransmittersRegister,
+            [Uri("users/!/transmitters")]
+            [OperationType("GET")]
+            TransmittersListByUser,
+            [Uri("GET")]
+            [OperationType("transmitters/!")]
+            TransmittersGetSpecificInformation,
+            [Uri("transmitters/!")]
+            [OperationType("PATCH")]
+            TransmittersUpdate,
+            [Uri("transmitters/!")]
+            [OperationType("DELETE")]
+            TransmittersDelete,
+            [Uri("transmitter/!/device/!")]
+            [OperationType("POST")]
+            TransmittersConnectToDevice,
+            [Uri("transmitter/!/device/!")]
+            [OperationType("DELETE")]
+            TransmittersDisconnectFromDevice,
+            [Uri("transmitters/!/devices")]
+            [OperationType("GET")]
+            TrasmittersListConnectedDevices
         }
 
         #region Fields
@@ -83,7 +236,7 @@ namespace relayr_csharp_sdk
 
         #endregion
 
-        public async Task<dynamic> PerformHttpOperation(httpOperation operation, string[] arguments, Dictionary<string, string> content) {
+        public async Task<dynamic> PerformHttpOperation(ApiCall operation, string[] arguments, Dictionary<string, string> content) {
             
             // Get the URI extension and opration type from the attributes of the operation
             Type type = operation.GetType();

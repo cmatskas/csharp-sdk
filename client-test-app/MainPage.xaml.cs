@@ -32,7 +32,7 @@ namespace ClientTestApp
 
         public async void testClient()
         {
-            //HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
 
             //dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.httpOperation.UserGetInfo, null, null);
 
