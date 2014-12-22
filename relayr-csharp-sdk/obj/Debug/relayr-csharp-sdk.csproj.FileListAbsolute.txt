@@ -16,3 +16,4 @@ C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\pri.resfile
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\qualifiers.txt
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.csprojResolveAssemblyReference.cache
