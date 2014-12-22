@@ -35,19 +35,6 @@ namespace csharp_sdk_unit_tests
         public async Task PerformHttpOperation_EmptyArguments_ThrowException()
         {
             await ThrowsAsync<ArgumentException>(() => HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null)); 
-
-
-            //Assert.ThrowsException<ArgumentException>(async() => await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null));
-
-            //try
-            //{
-            //    await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null);
-            //    Assert.Fail();
-            //}
-            //catch(ArgumentException e) 
-            //{
-            //    // Pass the test
-            //}
         }
 
         [TestMethod]
@@ -81,14 +68,7 @@ namespace csharp_sdk_unit_tests
         [TestMethod]
         public async Task PerformHttpOperation_NullArgumentsNoArgumentsRequired_ExecuteNormally()
         {
-            //try
-            //{
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
-            //}
-            //catch (Exception e)
-            //{
-            //    Assert.Fail();
-            //}
+            await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
         }
 
         [TestMethod]

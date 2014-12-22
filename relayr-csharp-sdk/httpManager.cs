@@ -245,10 +245,7 @@ namespace relayr_csharp_sdk
             string operationType = ((OperationType) field.GetCustomAttribute(typeof(OperationType), false)).Value;
 
             // Add the arguments to the URI, if required
-            if (arguments != null) 
-            {
-                uriExtension = processArguments(uriExtension, arguments);
-            }
+            uriExtension = processArguments(uriExtension, arguments);
 
             // Create the content json, if required
             StringContent contentJson = null;
@@ -288,6 +285,18 @@ namespace relayr_csharp_sdk
         // Take a uri and arguments, insert the arguments into the URI, return the URI
         private string processArguments(string uri, string[] args)
         {
+            if (args == null)
+            {
+                if (uri.Contains('!'))
+                {
+                    throw new ArgumentException("Expected arguments, received none");
+                }
+                else
+                {
+                    return uri;
+                }
+            }
+
             string[] uriPieces = uri.Split('!');
 
             // Throw an argumentexception if we didn't get the correct number of uri arguments
