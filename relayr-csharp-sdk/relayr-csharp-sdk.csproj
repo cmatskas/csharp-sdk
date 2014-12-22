@@ -38,7 +38,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="httpManager.cs" />
+    <Compile Include="HttpManager.cs" />
     <Compile Include="OperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UriAttribute.cs" />

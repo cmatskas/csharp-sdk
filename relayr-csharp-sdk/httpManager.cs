@@ -274,26 +274,37 @@ namespace relayr_csharp_sdk
             {
                 throw new InvalidOperationException("Response code is: " 
                     + message.StatusCode.ToString()
-                    + "Cannot create a object from JSON response if the operation was not successful (200 OK).");
+                    + ". Cannot create a object from JSON response if the operation was not successful (200 OK).");
             }
 
-            // Return null if there's no content
-            if (message.Content == null || message.Content.Equals(""))
+            if (message.Content == null)
             {
                 return null;
             }
 
             string returnedJson = await message.Content.ReadAsStringAsync();
 
-            // Check if the returned json is an array of objects. If so, parse as one.
-            if (returnedJson[0] == '[')
+            if (returnedJson.Equals(""))
             {
-                JArray responseElements = JArray.Parse(returnedJson);
-                return responseElements.ToArray<dynamic>();
+                return null;
             }
 
-            // Otherwise, parse it as a single json object
-            return JObject.Parse(returnedJson);
+            try 
+            { 
+                // Check if the returned json is an array of objects. If so, parse as one.
+                if (returnedJson[0] == '[')
+                {
+                    JArray responseElements = JArray.Parse(returnedJson);
+                    return responseElements.ToArray<dynamic>();
+                }
+
+                // Otherwise, parse it as a single json object
+                return JObject.Parse(returnedJson);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException("Error when parsing JSON content", e);
+            }
         }
 
         #region Helpers

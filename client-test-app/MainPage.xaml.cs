@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using relayr_csharp_sdk;
+using System.Net.Http;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -47,8 +48,18 @@ namespace ClientTestApp
             content.Add("description", "This is a special humidity sensor");
             content.Add("public", "135");
 
-            dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.DevicesUpdateAttributes,
-                new string[] { "a3533de9-9448-4f4f-828c-33d990909097" }, content);
+            HttpManager.Instance.OauthToken = "asdfasdfasdfasdffaaaaaakkkkkkkkkkkeeee";
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            dynamic x = await HttpManager.Instance.ConvertResponseContentToObject(message);
+
+            //HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+            //HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            //message.Content = new StringContent("");
+
+            //dynamic result = await HttpManager.Instance.ConvertResponseContentToObject(message);
+
+            //dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.DevicesUpdateAttributes,
+                //new string[] { "a3533de9-9448-4f4f-828c-33d990909097" }, content);
         }
     }
 }

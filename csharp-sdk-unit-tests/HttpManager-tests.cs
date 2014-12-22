@@ -215,10 +215,11 @@ namespace csharp_sdk_unit_tests
         [TestMethod]
         public async Task ConvertResponseContentToObject_Non200ResponseCode_ThrowException()
         {
+            HttpManager.Instance.OauthToken = "asdfasdfasdfasdffaaaaaakkkkkkkkkkkeeee";
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+
             try
             {
-                HttpManager.Instance.OauthToken = "asdfasdfasdfasdffaaaaaakkkkkkkkkkkeeee";
-                HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
                 await HttpManager.Instance.ConvertResponseContentToObject(message);
                 Assert.Fail();
             }

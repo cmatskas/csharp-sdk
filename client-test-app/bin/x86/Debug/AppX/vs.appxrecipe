@@ -20,17 +20,17 @@
     <AppXManifest Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2014-12-22T11:31:19.673</Modified>
+      <Modified>2014-12-22T11:35:28.916</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\ClientTestApp.exe">
       <PackagePath>ClientTestApp.exe</PackagePath>
-      <Modified>2014-12-22T11:31:19.145</Modified>
+      <Modified>2014-12-22T17:14:52.544</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll">
       <PackagePath>relayr-csharp-sdk.dll</PackagePath>
-      <Modified>2014-12-22T11:31:17.330</Modified>
+      <Modified>2014-12-22T17:13:48.144</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
@@ -58,11 +58,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2014-12-22T11:31:18.930</Modified>
+      <Modified>2014-12-22T11:35:28.462</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2014-12-22T11:31:18.932</Modified>
+      <Modified>2014-12-22T11:35:28.463</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\ClientTestApp.xr.xml">
       <PackagePath>ClientTestApp.xr.xml</PackagePath>
@@ -70,7 +70,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2014-12-22T11:31:19.376</Modified>
+      <Modified>2014-12-22T17:02:24.711</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
