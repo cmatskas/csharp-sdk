@@ -3,7 +3,6 @@ C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csha
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.pri
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.csprojResolveAssemblyReference.cache
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.dll
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.pdb
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\priconfig.xml

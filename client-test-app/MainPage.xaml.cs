@@ -47,8 +47,8 @@ namespace ClientTestApp
             content.Add("description", "This is a special humidity sensor");
             content.Add("public", "135");
 
-            //dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.httpOperation.DevicesUpdateAttributes,
-            //    new string[] { "a3533de9-9448-4f4f-828c-33d990909097" }, content);
+            dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.DevicesUpdateAttributes,
+                new string[] { "a3533de9-9448-4f4f-828c-33d990909097" }, content);
         }
     }
 }

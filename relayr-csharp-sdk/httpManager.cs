@@ -19,6 +19,9 @@ namespace relayr_csharp_sdk
         private HttpClient httpClient;
         private HttpRequestMessage httpRequest;
 
+        private bool conversionDummyBool;
+        private double conversionDummyDouble;
+
         // Initialize the HttpClient with the base URI of the relayr.api
         private HttpManager() 
         {
@@ -236,7 +239,7 @@ namespace relayr_csharp_sdk
 
         #endregion
 
-        public async Task<dynamic> PerformHttpOperation(ApiCall operation, string[] arguments, Dictionary<string, string> content) {
+        public async Task<HttpResponseMessage> PerformHttpOperation(ApiCall operation, string[] arguments, Dictionary<string, string> content) {
             
             // Get the URI extension and opration type from the attributes of the operation
             Type type = operation.GetType();
@@ -262,9 +265,14 @@ namespace relayr_csharp_sdk
             httpRequest.RequestUri = new Uri(uriExtension, UriKind.Relative);
             httpRequest.Content = contentJson;
 
-            // Send the http request
-            HttpResponseMessage rawJson = await httpClient.SendAsync(httpRequest);
-            string returnedJson = await rawJson.Content.ReadAsStringAsync();
+            // Send the http request, return the response message
+            return await httpClient.SendAsync(httpRequest);
+        }
+        
+        // Convert the JSON content of the response message into an object whose values can be easily accessed
+        public async Task<dynamic> ConvertResponseContentToObject(HttpResponseMessage message)
+        {
+            string returnedJson = await message.Content.ReadAsStringAsync();
 
             // Check if the returned json is an array of objects. If so, parse as one.
             if (returnedJson[0] == '[')
@@ -321,23 +329,17 @@ namespace relayr_csharp_sdk
                 jsonString.Append("\"").Append(pair.Key).Append("\" : ");
 
                 // ############### GIANT HACK NOT FOR CHILDREN'S EYES ##################
-                try
+
+                if (Boolean.TryParse(pair.Value, out conversionDummyBool) || 
+                    Double.TryParse(pair.Value, out conversionDummyDouble))
                 {
-                    Boolean.Parse(pair.Value);
                     jsonString.Append(pair.Value);
                 }
-                catch
+                else
                 {
-                    try
-                    {
-                        Double.Parse(pair.Value);
-                        jsonString.Append(pair.Value);
-                    }
-                    catch
-                    {
-                        jsonString.Append("\"").Append(pair.Value).Append("\"");
-                    }
+                    jsonString.Append("\"").Append(pair.Value).Append("\"");
                 }
+
                 // #####################################################################
             }
             jsonString.Append(" }");
