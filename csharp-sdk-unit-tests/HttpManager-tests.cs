@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using relayr_csharp_sdk;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace csharp_sdk_unit_tests
 {
@@ -10,7 +11,7 @@ namespace csharp_sdk_unit_tests
     public class HttpManagerTests
     {
         [ClassInitialize]
-        public void InitializeHttpManager()
+        public static void InitializeHttpManager(TestContext context)
         {
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
         }
@@ -33,15 +34,20 @@ namespace csharp_sdk_unit_tests
         [TestMethod]
         public async Task PerformHttpOperation_EmptyArguments_ThrowException()
         {
-            try
-            {
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null);
-                Assert.Fail();
-            }
-            catch(ArgumentException e) 
-            {
-                // Pass the test
-            }
+            await ThrowsAsync<ArgumentException>(() => HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null)); 
+
+
+            //Assert.ThrowsException<ArgumentException>(async() => await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null));
+
+            //try
+            //{
+            //    await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null);
+            //    Assert.Fail();
+            //}
+            //catch(ArgumentException e) 
+            //{
+            //    // Pass the test
+            //}
         }
 
         [TestMethod]
@@ -75,14 +81,14 @@ namespace csharp_sdk_unit_tests
         [TestMethod]
         public async Task PerformHttpOperation_NullArgumentsNoArgumentsRequired_ExecuteNormally()
         {
-            try
-            {
+            //try
+            //{
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
-            }
-            catch (Exception e)
-            {
-                Assert.Fail();
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Assert.Fail();
+            //}
         }
 
         [TestMethod]
@@ -91,7 +97,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserCheckEmail,
-                    new string[] { "judgefudge@relayr.io" }, null);
+                    new string[] { "134-236-3213-1135" }, null);
             }
             catch (Exception e)
             {
@@ -232,6 +238,25 @@ namespace csharp_sdk_unit_tests
         public async Task ConvertResponseContentToObject_NullPassedAsArgument_ThrowInvalidArgumentException()
         {
 
+        }
+
+
+
+        // Found on stack overflow
+        public static async Task ThrowsAsync<TException>(Func<Task> action, bool allowDerivedTypes = true)
+        {
+            try
+            {
+                await action();
+                Assert.Fail("Delegate did not throw expected exception " + typeof(TException).Name + ".");
+            }
+            catch (Exception ex)
+            {
+                if (allowDerivedTypes && !(ex is TException))
+                    Assert.Fail("Delegate threw exception of type " + ex.GetType().Name + ", but " + typeof(TException).Name + " or a derived type was expected.");
+                if (!allowDerivedTypes && ex.GetType() != typeof(TException))
+                    Assert.Fail("Delegate threw exception of type " + ex.GetType().Name + ", but " + typeof(TException).Name + " was expected.");
+            }
         }
     }
 }

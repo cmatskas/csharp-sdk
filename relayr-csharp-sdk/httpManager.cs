@@ -17,7 +17,6 @@ namespace relayr_csharp_sdk
         
         private string oauthToken;
         private HttpClient httpClient;
-        private HttpRequestMessage httpRequest;
 
         private bool conversionDummyBool;
         private double conversionDummyDouble;
@@ -28,8 +27,6 @@ namespace relayr_csharp_sdk
             httpClient = new HttpClient();
             Uri baseUri = new Uri("https://api.relayr.io/");
             httpClient.BaseAddress = baseUri;
-
-            httpRequest = new HttpRequestMessage();
         }
 
         public enum ApiCall
@@ -261,6 +258,7 @@ namespace relayr_csharp_sdk
             }
 
             // Set up the http request
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod(operationType);
             httpRequest.RequestUri = new Uri(uriExtension, UriKind.Relative);
             httpRequest.Content = contentJson;
