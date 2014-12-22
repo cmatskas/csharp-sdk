@@ -16,6 +16,8 @@ namespace csharp_sdk_unit_tests
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
         }
 
+        #region PerformHttpOperation
+
         /*
          * PerformHttpOperation functionality:
          *      - Overall: should perform the Http Operation specified. Arguments should be placed in 
@@ -34,7 +36,16 @@ namespace csharp_sdk_unit_tests
         [TestMethod]
         public async Task PerformHttpOperation_EmptyArguments_ThrowException()
         {
-            await ThrowsAsync<ArgumentException>(() => HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null)); 
+            try
+            {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null);
+                Assert.Fail();
+            }
+            catch (ArgumentException e)
+            {
+                // Pass the test
+            }
         }
 
         [TestMethod]
@@ -42,6 +53,7 @@ namespace csharp_sdk_unit_tests
         {
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[3] {"brr", "skrr", "hur"} , null);
                 Assert.Fail();
             }
@@ -56,6 +68,7 @@ namespace csharp_sdk_unit_tests
         {
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserCheckEmail, null, null);
                 Assert.Fail();
             }
@@ -68,6 +81,7 @@ namespace csharp_sdk_unit_tests
         [TestMethod]
         public async Task PerformHttpOperation_NullArgumentsNoArgumentsRequired_ExecuteNormally()
         {
+            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
             await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
         }
 
@@ -76,6 +90,7 @@ namespace csharp_sdk_unit_tests
         {
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserCheckEmail,
                     new string[] { "134-236-3213-1135" }, null);
             }
@@ -90,6 +105,7 @@ namespace csharp_sdk_unit_tests
         {
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf"}, null);
             }
@@ -107,6 +123,7 @@ namespace csharp_sdk_unit_tests
 
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
@@ -126,6 +143,7 @@ namespace csharp_sdk_unit_tests
 
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
@@ -144,6 +162,7 @@ namespace csharp_sdk_unit_tests
 
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
@@ -162,6 +181,7 @@ namespace csharp_sdk_unit_tests
 
             try
             {
+                HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
                 await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
@@ -180,62 +200,93 @@ namespace csharp_sdk_unit_tests
              */
         //***********************************
 
+        #endregion
+
         /*
          * ConvertResponseContentToObject functionality
          *      - Overall: should convert the Json string contained in the Content of the passed 
          *          HttpResponseMessage to a dynamic object.
          *      - Should throw an InvalidOperation exception if the response type is anything but a 200
          *      - If Content is empty, return a null dynamic object
-         *      - If there is an issue converting the Content, return a null dynamic object
+         *      - If there is an issue converting the Content, bubble up the exception from the Json converter
          *      - Throw an InvalidArgument exception if the parameter passed is null
          */
 
         [TestMethod]
         public async Task ConvertResponseContentToObject_Non200ResponseCode_ThrowException()
         {
-
+            try
+            {
+                HttpManager.Instance.OauthToken = "asdfasdfasdfasdffaaaaaakkkkkkkkkkkeeee";
+                HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+                await HttpManager.Instance.ConvertResponseContentToObject(message);
+                Assert.Fail();
+            }
+            catch(InvalidOperationException e)
+            {
+                // Passed test
+            }
         }
 
         [TestMethod]
         public async Task ConvertResponseContentToObject_200ResponseCode_ExecuteNormally()
         {
-
+            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            await HttpManager.Instance.ConvertResponseContentToObject(message);
         }
 
         [TestMethod]
         public async Task ConvertResponseContentToObject_EmptyContent_ReturnNull()
         {
-
+            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            message.Content = new StringContent("");
+            
+            dynamic result = await HttpManager.Instance.ConvertResponseContentToObject(message);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
-        public async Task ConvertResponseContentToObject_InvalidContentJson_ReturnNull()
+        public async Task ConvertResponseContentToObject_NullContent_ReturnNull()
         {
+            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            message.Content = null;
 
+            dynamic result = await HttpManager.Instance.ConvertResponseContentToObject(message);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public async Task ConvertResponseContentToObject_InvalidContentJson_ThrowInvalidOperationException()
+        {
+            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            message.Content = new StringContent("{\"waka\" : \"brrrr\", \"wut\" : }");
+
+            try
+            {
+                dynamic result = await HttpManager.Instance.ConvertResponseContentToObject(message);
+                Assert.Fail();
+            }
+            catch (InvalidOperationException ex) 
+            {
+                // Test passed   
+            }
         }
 
         [TestMethod]
         public async Task ConvertResponseContentToObject_NullPassedAsArgument_ThrowInvalidArgumentException()
         {
-
-        }
-
-
-
-        // Found on stack overflow
-        public static async Task ThrowsAsync<TException>(Func<Task> action, bool allowDerivedTypes = true)
-        {
             try
             {
-                await action();
-                Assert.Fail("Delegate did not throw expected exception " + typeof(TException).Name + ".");
+                await HttpManager.Instance.ConvertResponseContentToObject(null);
+                Assert.Fail();
             }
-            catch (Exception ex)
+            catch
             {
-                if (allowDerivedTypes && !(ex is TException))
-                    Assert.Fail("Delegate threw exception of type " + ex.GetType().Name + ", but " + typeof(TException).Name + " or a derived type was expected.");
-                if (!allowDerivedTypes && ex.GetType() != typeof(TException))
-                    Assert.Fail("Delegate threw exception of type " + ex.GetType().Name + ", but " + typeof(TException).Name + " was expected.");
+                // Passed test
             }
         }
     }

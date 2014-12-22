@@ -236,6 +236,8 @@ namespace relayr_csharp_sdk
 
         #endregion
 
+        // Perform a relayr API operation. Takes the operation, URI arguments, and a dictionary
+        // of key -> value pairs (which will be converted to a JSON string) for operation content
         public async Task<HttpResponseMessage> PerformHttpOperation(ApiCall operation, string[] arguments, Dictionary<string, string> content) {
             
             // Get the URI extension and opration type from the attributes of the operation
@@ -267,6 +269,20 @@ namespace relayr_csharp_sdk
         // Convert the JSON content of the response message into an object whose values can be easily accessed
         public async Task<dynamic> ConvertResponseContentToObject(HttpResponseMessage message)
         {
+            // Throw an InvalidOperation exception if the message isn't 200 OK
+            if (!message.IsSuccessStatusCode)
+            {
+                throw new InvalidOperationException("Response code is: " 
+                    + message.StatusCode.ToString()
+                    + "Cannot create a object from JSON response if the operation was not successful (200 OK).");
+            }
+
+            // Return null if there's no content
+            if (message.Content == null || message.Content.Equals(""))
+            {
+                return null;
+            }
+
             string returnedJson = await message.Content.ReadAsStringAsync();
 
             // Check if the returned json is an array of objects. If so, parse as one.
