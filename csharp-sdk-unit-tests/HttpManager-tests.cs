@@ -2,18 +2,24 @@
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using relayr_csharp_sdk;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace csharp_sdk_unit_tests
 {
     [TestClass]
     public class HttpManagerTests
     {
+        [ClassInitialize]
+        public void InitializeHttpManager()
+        {
+            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+        }
+
         /*
          * PerformHttpOperation functionality:
          *      - Overall: should perform the Http Operation specified. Arguments should be placed in 
          *          URI, content should be converted to a Json string and passed with the operation.
          *          Returns the result of the operation (containing Json response, etc)
-         *      - should throw an InvalidArgument exception if the passed operation is null
          *      - should throw an InvalidArgument exception if passed the incorrect number of arguments
          *      - content will always be constructed normally and sent. throw no exceptions here.
          *      - should return an HttpResponseMessage so that the result of the operation can be inspected
@@ -25,63 +31,158 @@ namespace csharp_sdk_unit_tests
          */
 
         [TestMethod]
-        public async Task PerformHttpOperation_NullOperation_ThrowException()
+        public async Task PerformHttpOperation_EmptyArguments_ThrowException()
         {
-
-        }
-
-        [TestMethod]
-        public async Task PerformHttpOperation_ZeroArguments_ThrowException()
-        {
-
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null);
+                Assert.Fail();
+            }
+            catch(ArgumentException e) 
+            {
+                // Pass the test
+            }
         }
 
         [TestMethod]
         public async Task PerformHttpOperation_TooManyArguments_ThrowException()
         {
-
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[3] {"brr", "skrr", "hur"} , null);
+                Assert.Fail();
+            }
+            catch (ArgumentException e)
+            {
+                // Pass the test
+            }
         }
 
         [TestMethod]
-        public async Task PerformHttpOperation_NullArguments_ThrowException()
+        public async Task PerformHttpOperation_NullArgumentsWhenArgumentsRequired_ThrowException()
         {
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserCheckEmail, null, null);
+                Assert.Fail();
+            }
+            catch (ArgumentException e)
+            {
+                // Pass the test
+            }
+        }
 
+        [TestMethod]
+        public async Task PerformHttpOperation_NullArgumentsNoArgumentsRequired_ExecuteNormally()
+        {
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public async Task PerformHttpOperation_CorrectNumArguments_ExecuteNormally()
         {
-
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserCheckEmail,
+                    new string[] { "judgefudge@relayr.io" }, null);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public async Task PerformHttpOperation_NullContent_ExecuteNormally()
         {
-
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                    new string[] { "asdf-asdf-asdf-asdf"}, null);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public async Task PerformHttpOperation_TooLittleContent_ExecuteNormally()
         {
+            Dictionary<string, string> content = new Dictionary<string, string>();
+            content.Add("name", "skkkrrrrrr");
 
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                    new string[] { "asdf-asdf-asdf-asdf" }, content);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public async Task PerformHttpOperation_TooMuchContent_ExecuteNormally()
         {
+            Dictionary<string, string> content = new Dictionary<string, string>();
+            content.Add("name", "skkkrrrrrr");
+            content.Add("email", "skkkrrrrrr@relayr.io");
+            content.Add("age", "born millenia before the dawn of man");
 
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                    new string[] { "asdf-asdf-asdf-asdf" }, content);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public async Task PerformHttpOperation_CorrectContent_ExecuteNormally()
         {
+            Dictionary<string, string> content = new Dictionary<string, string>();
+            content.Add("name", "skkkrrrrrr");
+            content.Add("email", "skkkrrrrrr@relayr.io");
 
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                    new string[] { "asdf-asdf-asdf-asdf" }, content);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
         public async Task PerformHttpOperation_IncorrectContent_ExecuteNormally()
         {
+            Dictionary<string, string> content = new Dictionary<string, string>();
+            content.Add("gender", "incomprehensible");
+            content.Add("age", "born millenia before the dawn of man");
 
+            try
+            {
+                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                    new string[] { "asdf-asdf-asdf-asdf" }, content);
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         //***********************************
