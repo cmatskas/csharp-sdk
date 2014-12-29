@@ -35,31 +35,10 @@ namespace ClientTestApp
         {
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
 
-            //dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.httpOperation.UserGetInfo, null, null);
-
-            //dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.httpOperation.DevicesUnderASpecificUserWithMeaning,
-            //    new string[] { "a3533de9-9448-4f4f-828c-33d990909097", "temperature" });            
-
-            //dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.httpOperation.DevicesUnderASpecificUser,
-            //    new string[] { "21bf95ec-b515-4a41-b6b5-fcde98a51e3f" }, null);
-
             Dictionary<string, string> content = new Dictionary<string, string>();
             content.Add("name", "Living room thermometer");
             content.Add("description", "This is a special humidity sensor");
             content.Add("public", "135");
-
-            HttpManager.Instance.OauthToken = "asdfasdfasdfasdffaaaaaakkkkkkkkkkkeeee";
-            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
-            dynamic x = await HttpManager.Instance.ConvertResponseContentToObject(message);
-
-            //HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-            //HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
-            //message.Content = new StringContent("");
-
-            //dynamic result = await HttpManager.Instance.ConvertResponseContentToObject(message);
-
-            //dynamic x = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.DevicesUpdateAttributes,
-                //new string[] { "a3533de9-9448-4f4f-828c-33d990909097" }, content);
         }
     }
 }

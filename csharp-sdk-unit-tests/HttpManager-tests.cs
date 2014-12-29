@@ -223,7 +223,7 @@ namespace csharp_sdk_unit_tests
                 await HttpManager.Instance.ConvertResponseContentToObject(message);
                 Assert.Fail();
             }
-            catch(InvalidOperationException e)
+            catch (InvalidOperationException e)
             {
                 // Passed test
             }
