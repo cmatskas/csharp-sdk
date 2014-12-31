@@ -40,7 +40,7 @@ namespace ClientTestApp
             content.Add("description", "This is a special humidity sensor");
             content.Add("public", "135");
 
-            MqttManager manager = new MqttManager();
+            MqttManager.Subscriber.ConnectToBroker("asdf", "asdf", "asdf");
         }
     }
 }

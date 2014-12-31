@@ -21,9 +21,10 @@ namespace relayr_csharp_sdk
         // when the client receives a value, it calls the update event in the specific function
 
         private MqttClient _client;
+        private List<Device> _devices;
 
-        private MqttManager _subscriber;
-        public MqttManager Subscriber
+        private static MqttManager _subscriber;
+        public static MqttManager Subscriber
         {
             get
             {
@@ -42,20 +43,69 @@ namespace relayr_csharp_sdk
             _client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
         }
 
-        public void SubscribeToDeviceData()
+        public void ConnectToBroker(string clientId, string username, string password)
         {
-
+            _client.Connect(clientId, username, password);
         }
 
-        public void UnsubscribeFromDeviceData()
+        public Device SubscribeToDeviceData(string deviceId, QualityOfService qualityOfService)
         {
+            byte serviceLevel = MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE;
+            switch (qualityOfService)
+            {
+                case QualityOfService.AtMostOnce:
+                    serviceLevel = MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE;
+                    break;
+                case QualityOfService.ExactlyOnce:
+                    serviceLevel = MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE;
+                    break;
+                case QualityOfService.GrantedFailure:
+                    serviceLevel = MqttMsgBase.QOS_LEVEL_GRANTED_FAILURE;
+                    break;
+            }
 
+            string topic = "/v1/" + deviceId + "/data";
+
+            _client.Subscribe(new string[] { topic }, new byte[] { serviceLevel });
+
+            // Create a device and add it to the list
+            Device device = new Device(deviceId, topic, qualityOfService);
+            _devices.Add(device);
+
+            // Return a reference to the device
+            return device;
+        }
+
+        public void UnsubscribeFromDeviceData(string deviceId)
+        {
+            
         }
 
         // Called whenever a new item of data is published by any topic the manager is subscribed to
         private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            
+            foreach (Device device in _devices)
+            {
+                if (device.DeviceId.Equals(e.Topic))
+                {
+                    QualityOfService qosLevel = QualityOfService.AtLeastOnce;
+                    switch (e.QosLevel)
+                    {
+                        case MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE:
+                            qosLevel = QualityOfService.AtMostOnce;
+                            break;
+                        case MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE:
+                            qosLevel = QualityOfService.ExactlyOnce;
+                            break;
+                        case MqttMsgBase.QOS_LEVEL_GRANTED_FAILURE:
+                            qosLevel = QualityOfService.GrantedFailure;
+                            break;
+                    }
+
+                    device.NewData(e.Message, e.Retain, e.DupFlag, qosLevel);
+                    break;
+                }
+            }
         }
 
 

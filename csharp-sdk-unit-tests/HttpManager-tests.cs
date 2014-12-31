@@ -39,7 +39,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[2], null);
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, new string[2], null);
                 Assert.Fail();
             }
             catch (ArgumentException e)
@@ -54,7 +54,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, new string[3] {"brr", "skrr", "hur"} , null);
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, new string[3] {"brr", "skrr", "hur"} , null);
                 Assert.Fail();
             }
             catch (ArgumentException e)
@@ -69,7 +69,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserCheckEmail, null, null);
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserCheckEmail, null, null);
                 Assert.Fail();
             }
             catch (ArgumentException e)
@@ -82,7 +82,7 @@ namespace csharp_sdk_unit_tests
         public async Task PerformHttpOperation_NullArgumentsNoArgumentsRequired_ExecuteNormally()
         {
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-            await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserCheckEmail,
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserCheckEmail,
                     new string[] { "134-236-3213-1135" }, null);
             }
             catch (Exception e)
@@ -106,7 +106,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf"}, null);
             }
             catch
@@ -124,7 +124,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
             catch
@@ -144,7 +144,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
             catch
@@ -163,7 +163,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
             catch
@@ -182,7 +182,7 @@ namespace csharp_sdk_unit_tests
             try
             {
                 HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-                await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserUpdateDetails,
+                await HttpManager.Instance.PerformHttpOperation(ApiCall.UserUpdateDetails,
                     new string[] { "asdf-asdf-asdf-asdf" }, content);
             }
             catch
@@ -216,7 +216,7 @@ namespace csharp_sdk_unit_tests
         public async Task ConvertResponseContentToObject_Non200ResponseCode_ThrowException()
         {
             HttpManager.Instance.OauthToken = "asdfasdfasdfasdffaaaaaakkkkkkkkkkkeeee";
-            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
 
             try
             {
@@ -233,7 +233,7 @@ namespace csharp_sdk_unit_tests
         public async Task ConvertResponseContentToObject_200ResponseCode_ExecuteNormally()
         {
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
             await HttpManager.Instance.ConvertResponseContentToObject(message);
         }
 
@@ -241,7 +241,7 @@ namespace csharp_sdk_unit_tests
         public async Task ConvertResponseContentToObject_EmptyContent_ReturnNull()
         {
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
             message.Content = new StringContent("");
             
             dynamic result = await HttpManager.Instance.ConvertResponseContentToObject(message);
@@ -252,7 +252,7 @@ namespace csharp_sdk_unit_tests
         public async Task ConvertResponseContentToObject_NullContent_ReturnNull()
         {
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
             message.Content = null;
 
             dynamic result = await HttpManager.Instance.ConvertResponseContentToObject(message);
@@ -263,7 +263,7 @@ namespace csharp_sdk_unit_tests
         public async Task ConvertResponseContentToObject_InvalidContentJson_ThrowInvalidOperationException()
         {
             HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
-            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(HttpManager.ApiCall.UserGetInfo, null, null);
+            HttpResponseMessage message = await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
             message.Content = new StringContent("{\"waka\" : \"brrrr\", \"wut\" : }");
 
             try

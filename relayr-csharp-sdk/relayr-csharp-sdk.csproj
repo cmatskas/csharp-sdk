@@ -38,10 +38,14 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Device.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="EventHandlers.cs" />
     <Compile Include="HttpManager.cs" />
     <Compile Include="MqttManager.cs" />
     <Compile Include="OperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublishedDataReceivedEventArgs.cs" />
     <Compile Include="UriAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
