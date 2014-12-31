@@ -9,14 +9,14 @@ namespace relayr_csharp_sdk
 {
     public class PublishedDataReceivedEventArgs
     {
-        public byte[] RawData;
+        public dynamic Data;
         public bool DupFlag;
         public bool Retain;
         public QualityOfService QosLevel;
 
-        public PublishedDataReceivedEventArgs(byte[] rawData, bool dupFlag, bool retain, QualityOfService qosLevel)
+        public PublishedDataReceivedEventArgs(dynamic data, bool dupFlag, bool retain, QualityOfService qosLevel)
         {
-            RawData = rawData;
+            Data = data;
             DupFlag = dupFlag;
             Retain = retain;
             QosLevel = qosLevel;

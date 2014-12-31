@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,23 @@ namespace relayr_csharp_sdk
         {
             if (PublishedDataReceived != null)
             {
-                PublishedDataReceivedEventArgs args = new PublishedDataReceivedEventArgs(rawData, dupFlag, retain, qosLevel);
+                string json = System.Text.Encoding.UTF8.GetString(rawData, 0, rawData.Length);
+
+                dynamic dataObject;
+
+                // If the Json data is an array, parse it as one
+                if (json[0] == '[')
+                {
+                    JArray responseElements = JArray.Parse(json);
+                    dataObject = responseElements.ToArray<dynamic>();
+                }
+                // Otherise, parse it as a single object
+                else
+                {
+                    dataObject = JObject.Parse(json);
+                }
+
+                PublishedDataReceivedEventArgs args = new PublishedDataReceivedEventArgs(dataObject, dupFlag, retain, qosLevel);
                 PublishedDataReceived(this, args);
             }
         }

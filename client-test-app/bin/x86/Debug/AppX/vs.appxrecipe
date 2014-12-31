@@ -26,11 +26,11 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\ClientTestApp.exe">
       <PackagePath>ClientTestApp.exe</PackagePath>
-      <Modified>2014-12-31T20:56:46.864</Modified>
+      <Modified>2014-12-31T21:11:56.299</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll">
       <PackagePath>relayr-csharp-sdk.dll</PackagePath>
-      <Modified>2014-12-31T20:56:45.986</Modified>
+      <Modified>2014-12-31T21:11:55.395</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\M2Mqtt.dll">
       <PackagePath>M2Mqtt.dll</PackagePath>
