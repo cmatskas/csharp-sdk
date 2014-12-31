@@ -21,7 +21,7 @@ namespace relayr_csharp_sdk
         // when the client receives a value, it calls the update event in the specific function
 
         private MqttClient _client;
-        private List<Device> _devices;
+        private Dictionary<string, Device> _devices;
 
         private static MqttManager _subscriber;
         public static MqttManager Subscriber
@@ -70,8 +70,8 @@ namespace relayr_csharp_sdk
 
             // Create a device and add it to the list
             Device device = new Device(deviceId, topic, qualityOfService);
-            _devices.Add(device);
-
+            _devices.Add(topic, device);
+            
             // Return a reference to the device
             return device;
         }
@@ -84,27 +84,25 @@ namespace relayr_csharp_sdk
         // Called whenever a new item of data is published by any topic the manager is subscribed to
         private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            foreach (Device device in _devices)
-            {
-                if (device.DeviceId.Equals(e.Topic))
-                {
-                    QualityOfService qosLevel = QualityOfService.AtLeastOnce;
-                    switch (e.QosLevel)
-                    {
-                        case MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE:
-                            qosLevel = QualityOfService.AtMostOnce;
-                            break;
-                        case MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE:
-                            qosLevel = QualityOfService.ExactlyOnce;
-                            break;
-                        case MqttMsgBase.QOS_LEVEL_GRANTED_FAILURE:
-                            qosLevel = QualityOfService.GrantedFailure;
-                            break;
-                    }
+            if (_devices.ContainsKey(e.Topic)) 
+            { 
+                Device device = _devices[e.Topic];
 
-                    device.NewData(e.Message, e.Retain, e.DupFlag, qosLevel);
-                    break;
+                QualityOfService qosLevel = QualityOfService.AtLeastOnce;
+                switch (e.QosLevel)
+                {
+                    case MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE:
+                        qosLevel = QualityOfService.AtMostOnce;
+                        break;
+                    case MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE:
+                        qosLevel = QualityOfService.ExactlyOnce;
+                        break;
+                    case MqttMsgBase.QOS_LEVEL_GRANTED_FAILURE:
+                        qosLevel = QualityOfService.GrantedFailure;
+                        break;
                 }
+
+                device.NewData(e.Message, e.Retain, e.DupFlag, qosLevel);
             }
         }
 
