@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2014 iThings4U Gmbh
+ * 
+ * Author:
+ *      Peter Dwersteg      
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

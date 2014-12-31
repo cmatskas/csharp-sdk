@@ -1,4 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
+﻿/*
+ * Copyright (c) 2014 iThings4U Gmbh
+ * 
+ * Author:
+ *      Peter Dwersteg      
+ */
+
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
