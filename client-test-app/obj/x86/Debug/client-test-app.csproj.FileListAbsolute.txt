@@ -38,3 +38,4 @@ C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\x86\Debug\qualifier
 C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\x86\Debug\relayr-csharp-sdk.pri.xml
 C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\obj\x86\Debug\ProjectArchitectures.txt
+C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\M2Mqtt.dll

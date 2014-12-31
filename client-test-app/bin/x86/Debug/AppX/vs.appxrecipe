@@ -20,17 +20,21 @@
     <AppXManifest Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2014-12-22T11:35:28.916</Modified>
+      <Modified>2014-12-30T00:35:34.446</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\ClientTestApp.exe">
       <PackagePath>ClientTestApp.exe</PackagePath>
-      <Modified>2014-12-29T19:44:00.323</Modified>
+      <Modified>2014-12-31T03:08:04.455</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll">
       <PackagePath>relayr-csharp-sdk.dll</PackagePath>
-      <Modified>2014-12-29T19:43:59.207</Modified>
+      <Modified>2014-12-31T03:08:03.982</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\M2Mqtt.dll">
+      <PackagePath>M2Mqtt.dll</PackagePath>
+      <Modified>2014-12-29T20:18:11.313</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
@@ -70,7 +74,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2014-12-22T17:02:24.711</Modified>
+      <Modified>2014-12-30T00:35:34.275</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

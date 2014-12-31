@@ -39,6 +39,8 @@ namespace ClientTestApp
             content.Add("name", "Living room thermometer");
             content.Add("description", "This is a special humidity sensor");
             content.Add("public", "135");
+
+            MqttManager manager = new MqttManager();
         }
     }
 }
