@@ -10,15 +10,7 @@ namespace relayr_csharp_sdk
 {
     public class MqttManager
     {
-
-        // create a singleton MqttClient
-        // provide this client with the users credentials
-        // have the client subscribe to whichever topics (devices) that the user wants
-        //      the manager will need to make an API call to connect the device to this application 
-        //      ^^ DON'T THINK THAT I ACTUALLY NEED TO DO THIS. THIS IS PROBABLY JUST FOR PUBNUB
-        // the client will then create an object (decide on the structure and type) for this topic (device)
-        // the client maintains a list of these devices 
-        // when the client receives a value, it calls the update event in the specific function
+        #region fields and properties
 
         private MqttClient _client;
         private Dictionary<string, Device> _devices;
@@ -37,17 +29,24 @@ namespace relayr_csharp_sdk
             }
         }
 
+        #endregion
+
         private MqttManager()
         {
             _client = new MqttClient("mqtt.relayr.io");
             _client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
+
+            _devices = new Dictionary<string, Device>();
         }
 
+        // Connect to the MQTT broker using the provided credentials
         public void ConnectToBroker(string clientId, string username, string password)
         {
             _client.Connect(clientId, username, password);
         }
 
+        // Subscribe to new data coming from the device specified by the deviceId, with the
+        // specified MQTT quality of service
         public Device SubscribeToDeviceData(string deviceId, QualityOfService qualityOfService)
         {
             byte serviceLevel = MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE;
@@ -76,9 +75,17 @@ namespace relayr_csharp_sdk
             return device;
         }
 
+        // Unsubscribe from the device specified by the deviceId
         public void UnsubscribeFromDeviceData(string deviceId)
         {
-            
+            string topic = "/v1/" + deviceId + "/data";
+            _client.Unsubscribe(new string[] { topic });
+
+            // Remove the device from the set of devices
+            if (_devices.ContainsKey(topic))
+            {
+                _devices.Remove(topic);
+            }
         }
 
         // Called whenever a new item of data is published by any topic the manager is subscribed to
@@ -105,17 +112,5 @@ namespace relayr_csharp_sdk
                 device.NewData(e.Message, e.Retain, e.DupFlag, qosLevel);
             }
         }
-
-
-        //private MqttManager()
-        //{
-        //    MqttClient client = new MqttClient("mqtt.relayr.io");
-        //    client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
-
-        //    //client.Connect("relayr", "relayr", "");
-
-        //    //client.Subscribe(new string[] { "/v1/e2fd5e51-5561-4e0b-a680-e785e69ed828/data" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-        //}
-
     }
 }
