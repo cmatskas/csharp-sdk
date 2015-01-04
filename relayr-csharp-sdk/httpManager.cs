@@ -20,35 +20,35 @@ namespace relayr_csharp_sdk
 
     public class HttpManager
     {
-        static private HttpManager manager;
+        static private HttpManager _manager;
         
-        private string oauthToken;
-        private HttpClient httpClient;
+        private string _oauthToken;
+        private HttpClient _httpClient;
 
-        private bool conversionDummyBool;
-        private double conversionDummyDouble;
+        private bool _conversionDummyBool;
+        private double _conversionDummyDouble;
 
         // Initialize the HttpClient with the base URI of the relayr.api
         private HttpManager() 
         {
-            httpClient = new HttpClient();
+            _httpClient = new HttpClient();
             Uri baseUri = new Uri("https://api.relayr.io/");
-            httpClient.BaseAddress = baseUri;
+            _httpClient.BaseAddress = baseUri;
         }
 
         #region Fields
 
         // Create / return reference to singleton manager object
-        public static HttpManager Instance
+        public static HttpManager Manager
         {
             get
             {
-                if (manager == null)
+                if (_manager == null)
                 {
-                    manager = new HttpManager();
+                    _manager = new HttpManager();
                 }
 
-                return manager;
+                return _manager;
             }
         }
 
@@ -57,12 +57,12 @@ namespace relayr_csharp_sdk
         {
             get
             {
-                return oauthToken;
+                return _oauthToken;
             }
             set
             {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", value);
-                oauthToken = value;
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", value);
+                _oauthToken = value;
             }
         }
 
@@ -95,7 +95,7 @@ namespace relayr_csharp_sdk
             httpRequest.Content = contentJson;
 
             // Send the http request, return the response message
-            return await httpClient.SendAsync(httpRequest);
+            return await _httpClient.SendAsync(httpRequest);
         }
         
         // Convert the JSON content of the response message into an object whose values can be easily accessed
@@ -196,8 +196,8 @@ namespace relayr_csharp_sdk
 
                 // ############### GIANT HACK NOT FOR CHILDREN'S EYES ##################
 
-                if (Boolean.TryParse(pair.Value, out conversionDummyBool) || 
-                    Double.TryParse(pair.Value, out conversionDummyDouble))
+                if (Boolean.TryParse(pair.Value, out _conversionDummyBool) || 
+                    Double.TryParse(pair.Value, out _conversionDummyDouble))
                 {
                     jsonString.Append(pair.Value);
                 }

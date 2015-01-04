@@ -32,11 +32,8 @@ namespace ClientTestApp
         }
 
         public async void testClient()
-        {
-            Dictionary<string, string> content = new Dictionary<string, string>();
-            content.Add("name", "Living room thermometer");
-            content.Add("description", "This is a special humidity sensor");
-            content.Add("public", "135");
+        { 
+        
         }
     }
 }

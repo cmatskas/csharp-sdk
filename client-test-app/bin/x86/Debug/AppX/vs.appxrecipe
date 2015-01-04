@@ -26,11 +26,11 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\ClientTestApp.exe">
       <PackagePath>ClientTestApp.exe</PackagePath>
-      <Modified>2015-01-04T07:53:19.212</Modified>
+      <Modified>2015-01-04T20:06:15.833</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll">
       <PackagePath>relayr-csharp-sdk.dll</PackagePath>
-      <Modified>2015-01-04T07:51:46.593</Modified>
+      <Modified>2015-01-04T19:45:55.951</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\M2Mqtt.dll">
       <PackagePath>M2Mqtt.dll</PackagePath>
@@ -74,7 +74,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2015-01-04T07:49:11.596</Modified>
+      <Modified>2015-01-04T19:45:57.573</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
