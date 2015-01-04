@@ -24,9 +24,6 @@ namespace ClientTestApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
-        private int testCounter = 0;
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -36,30 +33,10 @@ namespace ClientTestApp
 
         public async void testClient()
         {
-
             Dictionary<string, string> content = new Dictionary<string, string>();
             content.Add("name", "Living room thermometer");
             content.Add("description", "This is a special humidity sensor");
             content.Add("public", "135");
-
-            HttpResponseMessage userInfoResponse = await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
-            string userId = (string) (await HttpManager.Instance.ConvertResponseContentToObject(userInfoResponse))["id"];
-
-            HttpResponseMessage transmittersResponse = await HttpManager.Instance.PerformHttpOperation(ApiCall.TransmittersListByUser, new string[] { userId }, null);
-            dynamic transmitters = await HttpManager.Instance.ConvertResponseContentToObject(transmittersResponse);
-
-            string transmitterId = (string) transmitters[1]["id"];
-            string transmitterSecret = (string) transmitters[1]["secret"];
-
-           bool connectSuccess = MqttManager.Subscriber.ConnectToBroker("relayr", transmitterId, transmitterSecret);
-
-            //Device sound = MqttManager.Subscriber.SubscribeToDeviceData("a0dde2dc-bce6-4df3-8f6c-2b773ce6fb90", QualityOfService.AtLeastOnce);
-            //sound.PublishedDataReceived += sound_PublishedDataReceived;
-        }
-
-        void sound_PublishedDataReceived(object sender, PublishedDataReceivedEventArgs args)
-        {
-            
         }
     }
 }

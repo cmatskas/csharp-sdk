@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2014 iThings4U Gmbh
+ * 
+ * Author:
+ *      Peter Dwersteg      
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +15,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace relayr_csharp_sdk
 {
-    class Transmitter
+    public class Transmitter
     {
         #region fields and properties
 
@@ -17,6 +24,15 @@ namespace relayr_csharp_sdk
 
         public readonly Dictionary<string, Device> Devices;
         public QualityOfService DefaultQualityOfService;
+
+        private string _transmitterId;
+        public string TransmitterId
+        {
+            get
+            {
+                return _transmitterId;
+            }
+        }
 
         private string _clientId;
         public string ClientId
@@ -27,49 +43,28 @@ namespace relayr_csharp_sdk
             }
         }
 
-        private string _userName;
-        public string UserName
-        {
-            get
-            {
-                return _userName;
-            }
-        }
-
-        private static Transmitter _subscriber;
-        public static Transmitter Subscriber
-        {
-            get
-            {
-                if (_subscriber == null)
-                {
-                    _subscriber = new Transmitter();
-                }
-
-                return _subscriber;
-            }
-        }
-
         #endregion
 
-        private Transmitter()
+        public Transmitter(string transmitterId)
         {
             _client = new MqttClient("mqtt.relayr.io");
             _client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
             
             _devices = new Dictionary<string, Device>();
+            DefaultQualityOfService = QualityOfService.AtLeastOnce;
+
+            _transmitterId = transmitterId;
         }
 
         #region Connect and Disconnect
 
         // Connect to the MQTT broker using the provided credentials. Returns a bool representing
         // whether the connection was successful or not
-        public bool ConnectToBroker(string clientId, string username, string password)
+        public bool ConnectToBroker(string clientId, string transmitterSecret)
         {
             _clientId = clientId;
-            _userName = username;
 
-            _client.Connect(clientId, username, password);
+            _client.Connect(clientId, _transmitterId, transmitterSecret);
             return _client.IsConnected;
         }
 
@@ -77,13 +72,13 @@ namespace relayr_csharp_sdk
         // successful or not
         public Task<bool> DisconnectFromBrokerAsync()
         {
-            if (!_client.IsConnected)
-            {
-
-            }
-
             return Task.Run(() =>
             {
+                if (!_client.IsConnected)
+                {
+                    return true;
+                }
+
                 try
                 {
                     _client.Disconnect();
