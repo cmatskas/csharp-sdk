@@ -529,4 +529,3 @@ namespace ClientTestApp.client_test_app_XamlTypeInfo
 }
 
 
-

@@ -21,7 +21,27 @@ namespace relayr_csharp_sdk
 
         private MqttClient _client;
         private Dictionary<string, Device> _devices;
-        private bool _connected;
+
+        public readonly Dictionary<string, Device> Devices;
+        public QualityOfService DefaultQualityOfService;
+
+        private string _clientId;
+        public string ClientId
+        {
+            get
+            {
+                return _clientId;
+            }
+        }
+
+        private string _userName;
+        public string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+        }
 
         private static MqttManager _subscriber;
         public static MqttManager Subscriber
@@ -43,24 +63,25 @@ namespace relayr_csharp_sdk
         {
             _client = new MqttClient("mqtt.relayr.io");
             _client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
-            _client.ConnectionClosed += _client_ConnectionClosed;
-
+            
             _devices = new Dictionary<string, Device>();
         }
 
-        void _client_ConnectionClosed(object sender, EventArgs e)
-        {
-
-        }
+        #region Connect and Disconnect
 
         // Connect to the MQTT broker using the provided credentials. Returns a bool representing
         // whether the connection was successful or not
         public bool ConnectToBroker(string clientId, string username, string password)
         {
+            _clientId = clientId;
+            _userName = username;
+
             _client.Connect(clientId, username, password);
             return _client.IsConnected;
         }
 
+        // Disconnect from the MQTT broker. Returns a bool representing whether the operation was
+        // successful or not
         public Task<bool> DisconnectFromBrokerAsync()
         {
             if (!_client.IsConnected)
@@ -85,6 +106,17 @@ namespace relayr_csharp_sdk
                     return false;
                 }
             });
+        }
+
+        #endregion
+
+        #region Subscribe and Unsubscribe from Device
+
+        // Subscribe to new data coming from the device specified by the deviceId, with the
+        // default MQTT quality of service
+        public Device SubscribeToDeviceData(string deviceId)
+        {
+            return SubscribeToDeviceData(deviceId, DefaultQualityOfService);
         }
 
         // Subscribe to new data coming from the device specified by the deviceId, with the
@@ -129,6 +161,8 @@ namespace relayr_csharp_sdk
                 _devices.Remove(topic);
             }
         }
+
+        #endregion
 
         // Called whenever a new item of data is published by any topic the manager is subscribed to
         private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
