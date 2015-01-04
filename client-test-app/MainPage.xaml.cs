@@ -36,12 +36,33 @@ namespace ClientTestApp
 
         public async void testClient()
         {
-            HttpManager.Instance.OauthToken = "gl2wuz7OK.Pl_s_-gUOnmj.Ge_ZV.Y4K";
+            HttpManager.Instance.OauthToken = "c7UI1voiTqbqu1zbz2HROvR6kDaYtzZn";
 
             Dictionary<string, string> content = new Dictionary<string, string>();
             content.Add("name", "Living room thermometer");
             content.Add("description", "This is a special humidity sensor");
             content.Add("public", "135");
+
+            HttpResponseMessage userInfoResponse = await HttpManager.Instance.PerformHttpOperation(ApiCall.UserGetInfo, null, null);
+            string userId = (string) (await HttpManager.Instance.ConvertResponseContentToObject(userInfoResponse))["id"];
+
+            HttpResponseMessage transmittersResponse = await HttpManager.Instance.PerformHttpOperation(ApiCall.TransmittersListByUser, new string[] { userId }, null);
+            dynamic transmitters = await HttpManager.Instance.ConvertResponseContentToObject(transmittersResponse);
+
+            string transmitterId = (string) transmitters[1]["id"];
+            string transmitterSecret = (string) transmitters[1]["secret"];
+
+            bool connectSuccess = MqttManager.Subscriber.ConnectToBroker("peter", transmitterId, transmitterSecret);
+
+            bool disconnectSuccess = await MqttManager.Subscriber.DisconnectFromBrokerAsync();
+
+            //Device sound = MqttManager.Subscriber.SubscribeToDeviceData("a0dde2dc-bce6-4df3-8f6c-2b773ce6fb90", QualityOfService.AtLeastOnce);
+            //sound.PublishedDataReceived += sound_PublishedDataReceived;
+        }
+
+        void sound_PublishedDataReceived(object sender, PublishedDataReceivedEventArgs args)
+        {
+            
         }
     }
 }

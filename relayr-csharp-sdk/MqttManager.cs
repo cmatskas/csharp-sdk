@@ -21,6 +21,7 @@ namespace relayr_csharp_sdk
 
         private MqttClient _client;
         private Dictionary<string, Device> _devices;
+        private bool _connected;
 
         private static MqttManager _subscriber;
         public static MqttManager Subscriber
@@ -42,14 +43,48 @@ namespace relayr_csharp_sdk
         {
             _client = new MqttClient("mqtt.relayr.io");
             _client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
+            _client.ConnectionClosed += _client_ConnectionClosed;
 
             _devices = new Dictionary<string, Device>();
         }
 
-        // Connect to the MQTT broker using the provided credentials
-        public void ConnectToBroker(string clientId, string username, string password)
+        void _client_ConnectionClosed(object sender, EventArgs e)
+        {
+
+        }
+
+        // Connect to the MQTT broker using the provided credentials. Returns a bool representing
+        // whether the connection was successful or not
+        public bool ConnectToBroker(string clientId, string username, string password)
         {
             _client.Connect(clientId, username, password);
+            return _client.IsConnected;
+        }
+
+        public Task<bool> DisconnectFromBrokerAsync()
+        {
+            if (!_client.IsConnected)
+            {
+                
+            }
+
+            return Task.Run(() =>
+            {
+                try
+                {
+                    _client.Disconnect();
+                    while (_client.IsConnected)
+                    {
+                        Task.Delay(100);
+                    }
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            });
         }
 
         // Subscribe to new data coming from the device specified by the deviceId, with the
