@@ -36,7 +36,6 @@ namespace ClientTestApp
 
         public async void testClient()
         {
-            HttpManager.Instance.OauthToken = "c7UI1voiTqbqu1zbz2HROvR6kDaYtzZn";
 
             Dictionary<string, string> content = new Dictionary<string, string>();
             content.Add("name", "Living room thermometer");
@@ -52,9 +51,7 @@ namespace ClientTestApp
             string transmitterId = (string) transmitters[1]["id"];
             string transmitterSecret = (string) transmitters[1]["secret"];
 
-            bool connectSuccess = MqttManager.Subscriber.ConnectToBroker("peter", transmitterId, transmitterSecret);
-
-            bool disconnectSuccess = await MqttManager.Subscriber.DisconnectFromBrokerAsync();
+           bool connectSuccess = MqttManager.Subscriber.ConnectToBroker("relayr", transmitterId, transmitterSecret);
 
             //Device sound = MqttManager.Subscriber.SubscribeToDeviceData("a0dde2dc-bce6-4df3-8f6c-2b773ce6fb90", QualityOfService.AtLeastOnce);
             //sound.PublishedDataReceived += sound_PublishedDataReceived;
