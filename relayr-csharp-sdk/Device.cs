@@ -54,6 +54,8 @@ namespace relayr_csharp_sdk
             _qosLevel = qosLevel;
         }
 
+        // Provide new data to the device, process the data into a dynamic object, and raise the data received
+        // event. The user could call this, but why would they?
         public virtual void NewData(byte[] rawData, bool retain, bool dupFlag, QualityOfService qosLevel)
         {
             if (PublishedDataReceived != null)
@@ -62,16 +64,22 @@ namespace relayr_csharp_sdk
 
                 dynamic dataObject;
 
-                // If the Json data is an array, parse it as one
-                if (json[0] == '[')
-                {
-                    JArray responseElements = JArray.Parse(json);
-                    dataObject = responseElements.ToArray<dynamic>();
+                try { 
+                    // If the Json data is an array, parse it as one
+                    if (json[0] == '[')
+                    {
+                        JArray responseElements = JArray.Parse(json);
+                        dataObject = responseElements.ToArray<dynamic>();
+                    }
+                    // Otherise, parse it as a single object
+                    else
+                    {
+                        dataObject = JObject.Parse(json);
+                    }
                 }
-                // Otherise, parse it as a single object
-                else
+                catch (Exception e)
                 {
-                    dataObject = JObject.Parse(json);
+                    throw new ArgumentException("There was an error processing the JSON, it is probably improperly formatted", e);
                 }
 
                 PublishedDataReceivedEventArgs args = new PublishedDataReceivedEventArgs(dataObject, dupFlag, retain, qosLevel);
