@@ -1,1 +1,1 @@
-C:\Users\Peter Dwersteg\Documents\relayr\client-test-app\client-test-app.csproj;x86
+C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\client-test-app\client-test-app.csproj;x86
