@@ -32,8 +32,10 @@ namespace ClientTestApp
         }
 
         public async void testClient()
-        { 
-        
+        {
+            HttpManager.Manager.OauthToken = "FkvIAC-OPR97efwTuZXm9LnB32rbIzsk";
+
+
         }
     }
 }
