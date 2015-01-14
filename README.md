@@ -11,6 +11,16 @@ The C# SDK has two main functions:
 1. Programatically exposing the relayr API. This is achieved through the HttpManager class.
 2. Allowing applications to subscribe to the streams of data published by sensor modules and other connected devices. The Transmitter and Device classes handle this functionality. You will need security strings obtained through the HttpManager to subscribe to data topics.
 
+### Importing NuGet Libraries
+
+Before you can build a project including the C# SDK, you'll need to import two libraries via the [NuGet](https://www.nuget.org/) package manager in Visual Studio.
+
+1. In Visual Studio, go to *Tools > NuGet Package Manager > Manage NuGet Packages for Solution.*
+
+2. Select *Online* in the left hand menu and then search for and install the following two packages:
+
+	**Json.NET** and **M2Mqtt**
+
 ### Getting an OAuth token
 
 The HttpManager requires an OAuth token to authorize your HTTP requests. You can obtain a token in two manners:
