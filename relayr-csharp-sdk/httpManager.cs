@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -86,6 +87,7 @@ namespace relayr_csharp_sdk
             if (content != null)
             {
                 contentJson = new StringContent(createContentJson(content));
+                contentJson.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             }
 
             // Set up the http request
@@ -95,7 +97,15 @@ namespace relayr_csharp_sdk
             httpRequest.Content = contentJson;
 
             // Send the http request, return the response message
-            return await _httpClient.SendAsync(httpRequest);
+            try 
+            { 
+            
+                return await _httpClient.SendAsync(httpRequest);
+            }
+            catch(ProtocolViolationException e)
+            {
+                throw new InvalidOperationException("Cannot send content with operation of type " + operationType, e);
+            }
         }
         
         // Convert the JSON content of the response message into an object whose values can be easily accessed
@@ -139,7 +149,7 @@ namespace relayr_csharp_sdk
             }
         }
 
-        #region Helpers
+#region Helpers
 
         // Take a uri and arguments, insert the arguments into the URI, return the URI
         private string processArguments(string uri, string[] args)
@@ -214,5 +224,5 @@ namespace relayr_csharp_sdk
         }
 
         #endregion
-    }
+    }        
 }

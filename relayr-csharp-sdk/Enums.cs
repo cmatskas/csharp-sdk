@@ -125,10 +125,10 @@ namespace relayr_csharp_sdk
         [Uri("devices/!/apps/!")]
         [OperationType("DELETE")]
         DevicesDisconnectDeviceFromApp,
-        [Uri("users/!/devices/public?")]
+        [Uri("/devices/public?")]
         [OperationType("GET")]
         DevicesListPublic,
-        [Uri("users/!/devices/public?meaning=!")]
+        [Uri("/devices/public?meaning=!")]
         [OperationType("GET")]
         DevicesListPublicWithMeaning,
         [Uri("devices/!/subscription")]
@@ -167,17 +167,20 @@ namespace relayr_csharp_sdk
         [Uri("devices/!/configuration")]
         [OperationType("POST")]
         DeviceModifyConfiguration,
-        [Uri("POST")]
-        [OperationType("devices/!/cmd/!")]
+        [Uri("devices/!/cmd")]
+        [OperationType("POST")]
         DeviceIssueCommand,
+        [Uri("devices/!/cmd/!")]
+        [OperationType("POST")]
+        DeviceIssueCommandWithSuffix,
         [Uri("transmitters")]
-        [OperationType("Post")]
+        [OperationType("POST")]
         TransmittersRegister,
         [Uri("users/!/transmitters")]
         [OperationType("GET")]
         TransmittersListByUser,
-        [Uri("GET")]
-        [OperationType("transmitters/!")]
+        [Uri("transmitters/!")]
+        [OperationType("GET")]
         TransmittersGetSpecificInformation,
         [Uri("transmitters/!")]
         [OperationType("PATCH")]
