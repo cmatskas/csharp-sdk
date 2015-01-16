@@ -47,6 +47,11 @@ namespace relayr_csharp_sdk
 
         public Transmitter(string transmitterId)
         {
+            if (transmitterId == null || transmitterId == "")
+            {
+                throw new ArgumentException("Transmitter ID cannot be null or empty");
+            }
+
             _client = new MqttClient("mqtt.relayr.io");
             _client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
             
@@ -62,6 +67,11 @@ namespace relayr_csharp_sdk
         // whether the connection was successful or not
         public bool ConnectToBroker(string clientId, string transmitterSecret)
         {
+            if (transmitterSecret == null)
+            {
+                throw new ArgumentException("Transmitter Secret cannot be null");
+            }
+
             _clientId = clientId;
 
             _client.Connect(clientId, _transmitterId, transmitterSecret);
