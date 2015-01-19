@@ -147,7 +147,7 @@ namespace csharp_sdk_unit_tests
             { 
                 Transmitter transmitter = new Transmitter(transmitterId);
                 transmitter.ConnectToBroker("hello", transmitterSecret);
-                transmitter.SubscribeToDeviceData(null);
+                transmitter.SubscribeToDeviceDataAsync(null);
                 Assert.Fail();
             }
             catch(ArgumentException e)
@@ -163,7 +163,7 @@ namespace csharp_sdk_unit_tests
             {
                 Transmitter transmitter = new Transmitter(transmitterId);
                 transmitter.ConnectToBroker("hello", transmitterSecret);
-                transmitter.SubscribeToDeviceData("");
+                transmitter.SubscribeToDeviceDataAsync("");
                 Assert.Fail();
             }
             catch (ArgumentException e)
@@ -173,21 +173,21 @@ namespace csharp_sdk_unit_tests
         }
 
         [TestMethod]
-        public void SubscribeToSensor_Connection_Fails_ReturnNull()
+        public async void SubscribeToSensor_Connection_Fails_ReturnNull()
         {
             Transmitter transmitter = new Transmitter(transmitterId);
             transmitter.ConnectToBroker("hello", transmitterSecret);
-            Device device = transmitter.SubscribeToDeviceData("asdasd33");
+            Device device = await transmitter.SubscribeToDeviceDataAsync("asdasd33");
 
             //Assert.IsNull(device);
         }
 
         [TestMethod]
-        public void SubscribeToSensor_Connection_Successful_ReturnDevice()
+        public async void SubscribeToSensor_Connection_Successful_ReturnDevice()
         {
             Transmitter transmitter = new Transmitter(transmitterId);
             transmitter.ConnectToBroker("hello", transmitterSecret);
-            Device device = transmitter.SubscribeToDeviceData("d1fa0703-36bb-4694-8db1-a71becc9d489");
+            Device device = await transmitter.SubscribeToDeviceDataAsync("d1fa0703-36bb-4694-8db1-a71becc9d489");
 
             Assert.IsNotNull(device);
         }

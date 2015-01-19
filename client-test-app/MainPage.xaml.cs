@@ -33,7 +33,21 @@ namespace ClientTestApp
 
         public async void testClient()
         {
+            Relayr.OauthToken = "bD6fe1FoaXtvkg2E6MjRrNC6WLoyYeFQ";
+
+            List<dynamic> transmitters = await Relayr.GetTransmittersAsync();
             
+            Transmitter transmitter = Relayr.ConnectToBroker(transmitters[transmitters.Count - 1], "waka");
+
+            List<dynamic> devices = await transmitter.GetDevicesAsync();
+            Device device = await transmitter.SubscribeToDeviceDataAsync(devices[0]);
+            device.PublishedDataReceived += device_PublishedDataReceived;
+        }
+
+        // Handler for the the sensor's data published event
+        void device_PublishedDataReceived(object sender, PublishedDataReceivedEventArgs args)
+        {
+            // New sensor data is contained inside the args class
         }
     }
 }

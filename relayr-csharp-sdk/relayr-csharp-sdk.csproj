@@ -45,6 +45,7 @@
     <Compile Include="OperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishedDataReceivedEventArgs.cs" />
+    <Compile Include="Relayr.cs" />
     <Compile Include="Transmitter.cs" />
     <Compile Include="UriAttribute.cs" />
   </ItemGroup>

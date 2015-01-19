@@ -18,7 +18,6 @@ C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\qualifiers.
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.csprojResolveAssemblyReference.cache
 C:\Users\Peter Dwersteg\Documents\relayr\relayr-csharp-sdk\bin\Debug\M2Mqtt.dll
-C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.csprojResolveAssemblyReference.cache
 C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.dll
 C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.pdb
 C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll
@@ -38,3 +37,4 @@ C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\
 C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\qualifiers.txt
 C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\obj\Debug\relayr-csharp-sdk.csprojResolveAssemblyReference.cache

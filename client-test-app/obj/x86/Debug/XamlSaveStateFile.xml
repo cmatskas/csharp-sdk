@@ -1,6 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\peter dwersteg\documents\relayr\client-test-app\obj\x86\debug\intermediatexaml\clienttestapp.exe" HashGuid="86ab788e-e019-1e38-4f74-4983c29fe54d" />
-    <ReferenceAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\debug\relayr-csharp-sdk.dll" HashGuid="1b48011e-808d-cffb-65cd-d1314d63c0f7" />
+    <LocalAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\client-test-app\obj\x86\debug\intermediatexaml\clienttestapp.exe" HashGuid="dc426526-4d80-1504-d266-b2d704c4af9f" />
+    <ReferenceAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\debug\relayr-csharp-sdk.dll" HashGuid="ec2156b9-080d-73a4-8f6b-d1e8a31df4f3" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
@@ -20,7 +21,9 @@ namespace relayr_csharp_sdk
         #region fields and properties
 
         private MqttClient _client;
-        private Dictionary<string, Device> _devices;
+        private Dictionary<string, Device> _connectedDevices;
+
+        private List<dynamic> _devices;
 
         public readonly Dictionary<string, Device> Devices;
         public QualityOfService DefaultQualityOfService;
@@ -55,7 +58,7 @@ namespace relayr_csharp_sdk
             _client = new MqttClient("mqtt.relayr.io");
             _client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
             
-            _devices = new Dictionary<string, Device>();
+            _connectedDevices = new Dictionary<string, Device>();
             DefaultQualityOfService = QualityOfService.AtLeastOnce;
 
             _transmitterId = transmitterId;
@@ -70,6 +73,11 @@ namespace relayr_csharp_sdk
             if (transmitterSecret == null)
             {
                 throw new ArgumentException("Transmitter Secret cannot be null");
+            }
+
+            if (clientId == null || clientId.Equals(""))
+            {
+                throw new ArgumentException("ClientId cannot be null or empty");
             }
 
             _clientId = clientId;
@@ -110,20 +118,64 @@ namespace relayr_csharp_sdk
 
         #region Subscribe and Unsubscribe from Device
 
-        // Subscribe to new data coming from the device specified by the deviceId, with the
+        // Subscribe to new data coming from the device represented by the deviceInfo, with the
         // default MQTT quality of service
-        public Device SubscribeToDeviceData(string deviceId)
+        public async Task<Device> SubscribeToDeviceDataAsync(dynamic deviceInfo)
         {
-            return SubscribeToDeviceData(deviceId, DefaultQualityOfService);
+            return await SubscribeToDeviceDataAsync(deviceInfo, DefaultQualityOfService);
+        }
+
+        // Subscribe to new data coming from the device represented by the deviceInfo, with the
+        // specified MQTT quality of service
+        public async Task<Device> SubscribeToDeviceDataAsync(dynamic deviceInfo, QualityOfService qualityOfService)
+        {
+            try
+            {
+                return await SubscribeToDeviceDataAsync((string) deviceInfo["id"], qualityOfService);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Dynamic argument deviceInfo must be of type returned from Relayr API", e);
+            }
         }
 
         // Subscribe to new data coming from the device specified by the deviceId, with the
-        // specified MQTT quality of service
-        public Device SubscribeToDeviceData(string deviceId, QualityOfService qualityOfService)
+        // default MQTT quality of service
+        public async Task<Device> SubscribeToDeviceDataAsync(string deviceId)
         {
+            return await SubscribeToDeviceDataAsync(deviceId, DefaultQualityOfService);
+        }
+
+        // Subscribe to new data coming from the device specified by the deviceId, with the
+        // specified MQTT quality of service. Return a Device isntance representing the device if
+        // a device with that ID is registered to this transmitter. Otherwise, return null
+        public async Task<Device> SubscribeToDeviceDataAsync(string deviceId, QualityOfService qualityOfService)
+        {
+            // Argument checking
             if(deviceId == null || deviceId.Equals(""))
             {
                 throw new ArgumentException("Device ID cannot be null or empty");
+            }
+
+            // Determine whether the device is actually registered to the transmitter
+            if (_devices == null)
+            {
+                await GetDevicesAsync();   
+            }
+
+            bool found = false;
+            foreach(dynamic deviceObj in _devices) {
+                if (((string)deviceObj["id"]).Equals(deviceId))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            // return null if no such device is registered to a transmitter
+            if (!found)
+            {
+                return null;
             }
 
             byte serviceLevel = MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE;
@@ -140,39 +192,73 @@ namespace relayr_csharp_sdk
                     break;
             }
 
+            // Subscribe to the MQTT topic for this device
             string topic = "/v1/" + deviceId + "/data";
-
             _client.Subscribe(new string[] { topic }, new byte[] { serviceLevel });
 
             // Create a device and add it to the list
             Device device = new Device(deviceId, topic, qualityOfService);
-            _devices.Add(topic, device);
+            _connectedDevices.Add(topic, device);
 
             // Return a reference to the device
             return device;
         }
 
         // Unsubscribe from the device specified by the deviceId
-        public void UnsubscribeFromDeviceData(string deviceId)
+        public bool UnsubscribeFromDeviceData(string deviceId)
         {
             string topic = "/v1/" + deviceId + "/data";
 
             // Remove the device from the set of devices
-            if (_devices.ContainsKey(topic))
+            if (_connectedDevices.ContainsKey(topic))
             {
                 _client.Unsubscribe(new string[] { topic });
-                _devices.Remove(topic);
+                _connectedDevices.Remove(topic);
+                return true;
+            }
+            return false;
+        }
+
+        // Unsubscribe from the device represented by the passed dynamic object
+        public bool UnsubscribeFromDeviceData(dynamic device)
+        {
+            try
+            {
+                return UnsubscribeFromDeviceData((string)device["id"]);
+            }
+            catch
+            {
+                return false;
             }
         }
 
         #endregion
 
+        // Get a list of all devices registered to this transmitter
+        // Returns an empty list if there are no devices
+        public async Task<List<dynamic>> GetDevicesAsync()
+        {
+            HttpResponseMessage response = await HttpManager.Manager.PerformHttpOperation(ApiCall.TransmittersListConnectedDevices, 
+                                                                                            new String[] { _transmitterId }, null);
+            dynamic deviceList = await HttpManager.Manager.ConvertResponseContentToObject(response);
+
+            List<dynamic> devices = new List<dynamic>();
+            for (int i = 0; i < deviceList.Length; i++)
+            {
+                devices.Add(deviceList[i]);
+            }
+
+            // Update the list of devices
+            _devices = devices;
+            return devices;
+        }
+
         // Called whenever a new item of data is published by any topic the manager is subscribed to
         private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            if (_devices.ContainsKey(e.Topic))
+            if (_connectedDevices.ContainsKey(e.Topic))
             {
-                Device device = _devices[e.Topic];
+                Device device = _connectedDevices[e.Topic];
 
                 QualityOfService qosLevel = QualityOfService.AtLeastOnce;
                 switch (e.QosLevel)
