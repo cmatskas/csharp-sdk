@@ -130,11 +130,67 @@ namespace csharp_sdk_unit_tests
 
         #endregion
 
-        #region Create Transmitter Object
+        #region DisconnectFromBroker NOT IMPLEMENTED
 
-        /* When the Transmitter is created, throw an InvalidArgumentException if the string is anything other
-         * than something with content
+        #endregion
+
+        #region SubscribeToSensor
+
+        /* When deviceId is null or empty, throw an ArgumentException
+         * If connection is failed, return a null device and don't add it to the transmitter's internal list
          */
+
+        [TestMethod]
+        public void SubscribeToSensor_Null_DeviceId_ThrowException()
+        {
+            try 
+            { 
+                Transmitter transmitter = new Transmitter(transmitterId);
+                transmitter.ConnectToBroker("hello", transmitterSecret);
+                transmitter.SubscribeToDeviceData(null);
+                Assert.Fail();
+            }
+            catch(ArgumentException e)
+            {
+
+            }
+        }
+
+        [TestMethod]
+        public void SubscribeToSensor_Empty_DeviceId_ThrowException()
+        {
+            try
+            {
+                Transmitter transmitter = new Transmitter(transmitterId);
+                transmitter.ConnectToBroker("hello", transmitterSecret);
+                transmitter.SubscribeToDeviceData("");
+                Assert.Fail();
+            }
+            catch (ArgumentException e)
+            {
+
+            }
+        }
+
+        [TestMethod]
+        public void SubscribeToSensor_Connection_Fails_ReturnNull()
+        {
+            Transmitter transmitter = new Transmitter(transmitterId);
+            transmitter.ConnectToBroker("hello", transmitterSecret);
+            Device device = transmitter.SubscribeToDeviceData("asdasd33");
+
+            //Assert.IsNull(device);
+        }
+
+        [TestMethod]
+        public void SubscribeToSensor_Connection_Successful_ReturnDevice()
+        {
+            Transmitter transmitter = new Transmitter(transmitterId);
+            transmitter.ConnectToBroker("hello", transmitterSecret);
+            Device device = transmitter.SubscribeToDeviceData("d1fa0703-36bb-4694-8db1-a71becc9d489");
+
+            Assert.IsNotNull(device);
+        }
 
         #endregion
     }

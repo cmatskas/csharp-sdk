@@ -121,6 +121,11 @@ namespace relayr_csharp_sdk
         // specified MQTT quality of service
         public Device SubscribeToDeviceData(string deviceId, QualityOfService qualityOfService)
         {
+            if(deviceId == null || deviceId.Equals(""))
+            {
+                throw new ArgumentException("Device ID cannot be null or empty");
+            }
+
             byte serviceLevel = MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE;
             switch (qualityOfService)
             {
@@ -151,11 +156,11 @@ namespace relayr_csharp_sdk
         public void UnsubscribeFromDeviceData(string deviceId)
         {
             string topic = "/v1/" + deviceId + "/data";
-            _client.Unsubscribe(new string[] { topic });
 
             // Remove the device from the set of devices
             if (_devices.ContainsKey(topic))
             {
+                _client.Unsubscribe(new string[] { topic });
                 _devices.Remove(topic);
             }
         }
