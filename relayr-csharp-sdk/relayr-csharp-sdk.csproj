@@ -38,6 +38,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MqttChannelManager.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="EventHandlers.cs" />

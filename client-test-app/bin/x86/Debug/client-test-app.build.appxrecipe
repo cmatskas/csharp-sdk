@@ -19,11 +19,11 @@
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\client-test-app\bin\x86\Debug\ClientTestApp.exe">
       <PackagePath>ClientTestApp.exe</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\packages\M2Mqtt.4.0\lib\netcore451\M2Mqtt.dll">
+      <PackagePath>M2Mqtt.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll">
       <PackagePath>relayr-csharp-sdk.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\Debug\M2Mqtt.dll">
-      <PackagePath>M2Mqtt.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>

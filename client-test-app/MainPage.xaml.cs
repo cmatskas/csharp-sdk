@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using relayr_csharp_sdk;
 using System.Net.Http;
+using uPLibrary.Networking.M2Mqtt;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,21 +34,31 @@ namespace ClientTestApp
 
         public async void testClient()
         {
-            Relayr.OauthToken = "bD6fe1FoaXtvkg2E6MjRrNC6WLoyYeFQ";
+            Relayr.OauthToken = "TEAM TOKEN HERE";
+            List<dynamic> Transmitters = await Relayr.GetTransmittersAsync();
 
-            List<dynamic> transmitters = await Relayr.GetTransmittersAsync();
-            
-            Transmitter transmitter = Relayr.ConnectToBroker(transmitters[transmitters.Count - 1], "waka");
+            List<dynamic> devices = null;
+            Transmitter t = null;
+            foreach (dynamic transmitter in Transmitters)
+            {
+                string id = (string)transmitter["id"];
+                if (id.Equals("IN THE NEIGHBORHOOD ID HERE"))
+                {
+                    t = new Transmitter(id);
+                    break;
+                }
+            }
 
-            List<dynamic> devices = await transmitter.GetDevicesAsync();
-            Device device = await transmitter.SubscribeToDeviceDataAsync(devices[0]);
-            device.PublishedDataReceived += device_PublishedDataReceived;
+            devices = await t.GetDevicesAsync();
+
+            Device d = await MqttChannelManager.SubscribeToDeviceData((string)devices[0]["id"]);
+            d.PublishedDataReceived += d_PublishedDataReceived;
+
         }
 
-        // Handler for the the sensor's data published event
-        void device_PublishedDataReceived(object sender, PublishedDataReceivedEventArgs args)
+        void d_PublishedDataReceived(object sender, PublishedDataReceivedEventArgs args)
         {
-            // New sensor data is contained inside the args class
+            //throw new NotImplementedException();
         }
     }
 }

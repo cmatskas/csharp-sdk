@@ -103,5 +103,15 @@ namespace relayr_csharp_sdk
             dynamic userInfo = await HttpManager.Manager.ConvertResponseContentToObject(response);
             _userId = (string)userInfo["id"];
         }
+
+
+        #region channels
+
+        //public static async Device SubscribeToChannel()
+        //{
+
+        //}
+
+        #endregion
     }
 }

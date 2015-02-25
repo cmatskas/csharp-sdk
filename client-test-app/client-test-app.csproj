@@ -134,6 +134,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="M2Mqtt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\M2Mqtt.4.0\lib\netcore451\M2Mqtt.dll</HintPath>
+    </Reference>
     <Reference Include="relayr-csharp-sdk">
       <HintPath>..\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll</HintPath>
     </Reference>

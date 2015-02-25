@@ -196,7 +196,10 @@ namespace relayr_csharp_sdk
         TransmittersDisconnectFromDevice,
         [Uri("transmitters/!/devices")]
         [OperationType("GET")]
-        TransmittersListConnectedDevices
+        TransmittersListConnectedDevices,
+        [Uri("channels")]
+        [OperationType("POST")]
+        CreateChannel
     }
 
 }

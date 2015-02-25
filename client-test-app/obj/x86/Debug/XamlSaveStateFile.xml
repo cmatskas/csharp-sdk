@@ -1,6 +1,7 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\client-test-app\obj\x86\debug\intermediatexaml\clienttestapp.exe" HashGuid="dc426526-4d80-1504-d266-b2d704c4af9f" />
-    <ReferenceAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\debug\relayr-csharp-sdk.dll" HashGuid="ec2156b9-080d-73a4-8f6b-d1e8a31df4f3" />
+    <LocalAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\client-test-app\obj\x86\debug\intermediatexaml\clienttestapp.exe" HashGuid="3ac13fd7-095c-9bd1-fe2d-0fe711923e8d" />
+    <ReferenceAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\packages\m2mqtt.4.0\lib\netcore451\m2mqtt.dll" HashGuid="24445b59-1c5d-b2e5-47d9-d1f0dbf25dbf" />
+    <ReferenceAssembly PathName="c:\users\peter dwersteg\documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\debug\relayr-csharp-sdk.dll" HashGuid="3b470055-9f0b-cee2-aabb-1e4a673c2cc1" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

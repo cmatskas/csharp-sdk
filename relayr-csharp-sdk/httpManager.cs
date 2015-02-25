@@ -99,7 +99,6 @@ namespace relayr_csharp_sdk
             // Send the http request, return the response message
             try 
             { 
-            
                 return await _httpClient.SendAsync(httpRequest);
             }
             catch(ProtocolViolationException e)

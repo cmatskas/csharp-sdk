@@ -20,21 +20,21 @@
     <AppXManifest Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\client-test-app\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-01-19T09:34:48.663</Modified>
+      <Modified>2015-02-24T23:12:11.834</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\client-test-app\bin\x86\Debug\ClientTestApp.exe">
       <PackagePath>ClientTestApp.exe</PackagePath>
-      <Modified>2015-01-19T13:29:07.642</Modified>
+      <Modified>2015-02-25T04:00:50.565</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\packages\M2Mqtt.4.0\lib\netcore451\M2Mqtt.dll">
+      <PackagePath>M2Mqtt.dll</PackagePath>
+      <Modified>2015-01-13T10:49:41.276</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll">
       <PackagePath>relayr-csharp-sdk.dll</PackagePath>
-      <Modified>2015-01-19T13:29:06.895</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\Debug\M2Mqtt.dll">
-      <PackagePath>M2Mqtt.dll</PackagePath>
-      <Modified>2015-01-13T10:49:41.257</Modified>
+      <Modified>2015-02-25T03:56:28.746</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\bin\Debug\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
@@ -74,7 +74,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\client-test-app\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2015-01-19T09:34:48.471</Modified>
+      <Modified>2015-02-25T03:41:23.720</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
