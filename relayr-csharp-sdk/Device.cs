@@ -54,6 +54,21 @@ namespace relayr_csharp_sdk
             _qosLevel = qosLevel;
         }
 
+        // Returns an ID if the dynamic is a valid relayr device. Return null if not
+        public static string GetDeviceIdFromDynamic(dynamic device)
+        {
+            try
+            {
+                string test = (string)device["public"];
+                string id = (string)device["id"];
+                return id;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         // Provide new data to the device, process the data into a dynamic object, and raise the data received
         // event. The user could call this, but why would they?
         public virtual void NewData(byte[] rawData, bool retain, bool dupFlag, QualityOfService qosLevel)

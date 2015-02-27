@@ -14,7 +14,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using relayr_csharp_sdk;
 using System.Net.Http;
-using uPLibrary.Networking.M2Mqtt;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -42,7 +41,7 @@ namespace ClientTestApp
             foreach (dynamic transmitter in Transmitters)
             {
                 string id = (string)transmitter["id"];
-                if (id.Equals("IN THE NEIGHBORHOOD ID HERE"))
+                if (id.Equals("IN THE NEIGHBORHOOD TRANSMITTER ID HERE"))
                 {
                     t = new Transmitter(id);
                     break;
@@ -51,7 +50,7 @@ namespace ClientTestApp
 
             devices = await t.GetDevicesAsync();
 
-            Device d = await MqttChannelManager.SubscribeToDeviceData((string)devices[0]["id"]);
+            Device d = await MqttChannelManager.SubscribeToDeviceData(devices[0]);
             d.PublishedDataReceived += d_PublishedDataReceived;
 
         }

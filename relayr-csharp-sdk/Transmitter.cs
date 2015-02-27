@@ -129,14 +129,13 @@ namespace relayr_csharp_sdk
         // specified MQTT quality of service
         public async Task<Device> SubscribeToDeviceDataAsync(dynamic deviceInfo, QualityOfService qualityOfService)
         {
-            try
+            string id = Device.GetDeviceIdFromDynamic(deviceInfo);
+            if (id == null)
             {
-                return await SubscribeToDeviceDataAsync((string) deviceInfo["id"], qualityOfService);
+                throw new ArgumentException("Passed dynamic object must be of a relayr device type");
             }
-            catch (Exception e)
-            {
-                throw new Exception("Dynamic argument deviceInfo must be of type returned from Relayr API", e);
-            }
+
+            return await SubscribeToDeviceDataAsync(id, qualityOfService);
         }
 
         // Subscribe to new data coming from the device specified by the deviceId, with the
@@ -222,14 +221,13 @@ namespace relayr_csharp_sdk
         // Unsubscribe from the device represented by the passed dynamic object
         public bool UnsubscribeFromDeviceData(dynamic device)
         {
-            try
+            string id = Device.GetDeviceIdFromDynamic(device);
+            if (id == null)
             {
-                return UnsubscribeFromDeviceData((string)device["id"]);
+                throw new ArgumentException("Passed dynamic object must be of a relayr device type");
             }
-            catch
-            {
-                return false;
-            }
+
+            return UnsubscribeFromDeviceData(id);
         }
 
         #endregion
