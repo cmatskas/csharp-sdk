@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using relayr_csharp_sdk;
 using System.Net.Http;
@@ -12,8 +9,8 @@ namespace csharp_sdk_unit_tests
     [TestClass]
     public class MqttManager_tests
     {
-        private string transmitterId = "";
-        private string transmitterSecret = "";
+        private string transmitterId = string.Empty;
+        private string transmitterSecret = string.Empty;
 
         [TestInitialize]
         public async Task GetHttpValues()
@@ -64,7 +61,7 @@ namespace csharp_sdk_unit_tests
                 Transmitter transmitter = new Transmitter("");
                 Assert.Fail();
             }
-            catch(ArgumentException e)
+            catch(ArgumentException)
             {
 
             }
@@ -78,7 +75,7 @@ namespace csharp_sdk_unit_tests
                 Transmitter transmitter = new Transmitter(null);
                 Assert.Fail();
             }
-            catch(ArgumentException e)
+            catch(ArgumentException)
             {
             
             }
@@ -93,7 +90,7 @@ namespace csharp_sdk_unit_tests
                 transmitter.ConnectToBroker(null, transmitterSecret);
                 Assert.Fail();
             }
-            catch(ArgumentException e)
+            catch(ArgumentException)
             {
 
             }
@@ -108,7 +105,7 @@ namespace csharp_sdk_unit_tests
                 transmitter.ConnectToBroker("hello", null);
                 Assert.Fail();
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
 
             }
@@ -141,32 +138,32 @@ namespace csharp_sdk_unit_tests
          */
 
         [TestMethod]
-        public void SubscribeToSensor_Null_DeviceId_ThrowException()
+        public async void SubscribeToSensor_Null_DeviceId_ThrowException()
         {
             try 
             { 
                 Transmitter transmitter = new Transmitter(transmitterId);
                 transmitter.ConnectToBroker("hello", transmitterSecret);
-                transmitter.SubscribeToDeviceDataAsync(null);
+                await transmitter.SubscribeToDeviceDataAsync(null);
                 Assert.Fail();
             }
-            catch(ArgumentException e)
+            catch(ArgumentException)
             {
 
             }
         }
 
         [TestMethod]
-        public void SubscribeToSensor_Empty_DeviceId_ThrowException()
+        public async void SubscribeToSensor_Empty_DeviceId_ThrowException()
         {
             try
             {
                 Transmitter transmitter = new Transmitter(transmitterId);
                 transmitter.ConnectToBroker("hello", transmitterSecret);
-                transmitter.SubscribeToDeviceDataAsync("");
+                await transmitter.SubscribeToDeviceDataAsync("");
                 Assert.Fail();
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
 
             }

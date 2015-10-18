@@ -7,9 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -50,7 +48,7 @@ namespace relayr_csharp_sdk
             Random r = new Random();
             if (ClientId == null) 
             { 
-                ClientId = r.Next(0, Int16.MaxValue) + "";
+                ClientId = r.Next(0, short.MaxValue) + "";
             }
 
             // Assign the quality of service to be AtLeastOnce if it hasn't been set yet.

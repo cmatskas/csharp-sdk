@@ -1,2 +1,0 @@
-C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\csharp-sdk-unit-tests\csharp-sdk-unit-tests.csproj;x86
-C:\Users\Peter Dwersteg\Documents\relayr-csharp-sdk\relayr-csharp-sdk\relayr-csharp-sdk.csproj;neutral

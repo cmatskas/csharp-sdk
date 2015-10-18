@@ -42,7 +42,7 @@ namespace csharp_sdk_unit_tests
                 await HttpManager.Manager.PerformHttpOperation(ApiCall.UserGetInfo, new string[2], null);
                 Assert.Fail();
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 // Pass the test
             }
@@ -57,7 +57,7 @@ namespace csharp_sdk_unit_tests
                 await HttpManager.Manager.PerformHttpOperation(ApiCall.UserGetInfo, new string[3] {"brr", "skrr", "hur"} , null);
                 Assert.Fail();
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 // Pass the test
             }
@@ -72,7 +72,7 @@ namespace csharp_sdk_unit_tests
                 await HttpManager.Manager.PerformHttpOperation(ApiCall.UserCheckEmail, null, null);
                 Assert.Fail();
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 // Pass the test
             }
@@ -94,7 +94,7 @@ namespace csharp_sdk_unit_tests
                 await HttpManager.Manager.PerformHttpOperation(ApiCall.UserCheckEmail,
                     new string[] { "134-236-3213-1135" }, null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -223,7 +223,7 @@ namespace csharp_sdk_unit_tests
                 await HttpManager.Manager.ConvertResponseContentToObject(message);
                 Assert.Fail();
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
                 // Passed test
             }
@@ -271,7 +271,7 @@ namespace csharp_sdk_unit_tests
                 dynamic result = await HttpManager.Manager.ConvertResponseContentToObject(message);
                 Assert.Fail();
             }
-            catch (InvalidOperationException ex) 
+            catch (InvalidOperationException) 
             {
                 // Test passed   
             }

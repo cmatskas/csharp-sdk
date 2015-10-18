@@ -134,9 +134,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="M2Mqtt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\M2Mqtt.4.0\lib\netcore451\M2Mqtt.dll</HintPath>
+    <Reference Include="M2Mqtt.WinRT, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.2.0.1\lib\win81\M2Mqtt.WinRT.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="relayr-csharp-sdk">
       <HintPath>..\relayr-csharp-sdk\bin\Debug\relayr-csharp-sdk.dll</HintPath>
