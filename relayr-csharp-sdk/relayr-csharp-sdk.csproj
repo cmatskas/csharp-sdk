@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,10 +34,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup>
-    <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
-    <TargetPlatform Include="Windows, Version=8.1" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="MqttChannelManager.cs" />
     <Compile Include="Device.cs" />
@@ -51,15 +48,21 @@
     <Compile Include="UriAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="M2Mqtt">
-      <HintPath>..\packages\M2Mqtt.4.0\lib\netcore451\M2Mqtt.dll</HintPath>
+    <Reference Include="M2Mqtt.WinRT, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.2.0.1\lib\win81\M2Mqtt.WinRT.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TargetPlatform Include="Windows, Version=8.1" />
+    <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,19 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using relayr_csharp_sdk;
-using System.Net.Http;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,31 +22,21 @@ namespace ClientTestApp
 
         public async void testClient()
         {
-            Relayr.OauthToken = "TEAM TOKEN HERE";
-            List<dynamic> Transmitters = await Relayr.GetTransmittersAsync();
+            Relayr.OauthToken = "YOUR OAUTH TOKEN";
+            var Transmitters = await Relayr.GetTransmittersAsync();
+            
+            var transmitterInfo = Transmitters[0];
+            var transmitter = Relayr.ConnectToBroker(transmitterInfo, "YOUR OAUTH CLIENT ID");
+            var devices = await transmitter.GetDevicesAsync();
 
-            List<dynamic> devices = null;
-            Transmitter t = null;
-            foreach (dynamic transmitter in Transmitters)
-            {
-                string id = (string)transmitter["id"];
-                if (id.Equals("IN THE NEIGHBORHOOD TRANSMITTER ID HERE"))
-                {
-                    t = new Transmitter(id);
-                    break;
-                }
-            }
-
-            devices = await t.GetDevicesAsync();
-
-            Device d = await MqttChannelManager.SubscribeToDeviceData(devices[0]);
+            Device d = await transmitter.SubscribeToDeviceDataAsync(devices[3]);
             d.PublishedDataReceived += d_PublishedDataReceived;
 
         }
 
         void d_PublishedDataReceived(object sender, PublishedDataReceivedEventArgs args)
         {
-            //throw new NotImplementedException();
+            // Do something with the data. The data is part of 'args'
         }
     }
 }
