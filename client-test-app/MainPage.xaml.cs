@@ -17,10 +17,13 @@ namespace ClientTestApp
         {
             this.InitializeComponent();
 
-            testClient();
+            // (Un)comment the method you need to test
+
+            //TestClient();
+            TestClientDevices();
         }
 
-        public async void testClient()
+        public async void TestClient()
         {
             Relayr.OauthToken = "YOUR OAUTH TOKEN";
             var Transmitters = await Relayr.GetTransmittersAsync();
@@ -32,6 +35,12 @@ namespace ClientTestApp
             Device d = await transmitter.SubscribeToDeviceDataAsync(devices[3]);
             d.PublishedDataReceived += d_PublishedDataReceived;
 
+        }
+
+        public async void TestClientDevices()
+        {
+            Relayr.OauthToken = "YOUR OAUTH TOKEN";
+            var devices = await Relayr.GetDevicesAsync();
         }
 
         void d_PublishedDataReceived(object sender, PublishedDataReceivedEventArgs args)

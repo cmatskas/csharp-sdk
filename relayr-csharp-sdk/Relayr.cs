@@ -64,6 +64,25 @@ namespace relayr_csharp_sdk
             return transmitters;
         }
 
+        public static async Task<List<dynamic>> GetDevicesAsync()
+        {
+            if (_userId == null)
+            {
+                await getUserInformation();
+            }
+
+            var response = await HttpManager.Manager.PerformHttpOperation(ApiCall.DevicesListUnderSpecificUser, new string[] { _userId }, null);
+            dynamic deviceList = await HttpManager.Manager.ConvertResponseContentToObject(response);
+            var devices = new List<dynamic>();
+
+            for (int i = 0; i < deviceList.Length; i++)
+            {
+                devices.Add(deviceList[i]);
+            }
+
+            return devices;
+        }
+
         // Try to connect to the broker using the given dynamic representation of a transmitter and
         // the specified clientID. If connection is successful, it will return a Transmitter isntance
         // representing the transmitter. Returns null otherwise.
